@@ -64,8 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Level\Enemy\EnemyGreen_script.cs" />
+    <Compile Include="Assets\Script\Enemy\Enemy_script.cs" />
     <Compile Include="Assets\Script\FlightObject_Script.cs" />
     <Compile Include="Assets\Script\Map_Script.cs" />
+    <Compile Include="Assets\Script\Spawn_Script.cs" />
     <Compile Include="Assets\Script\moveCharacter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
