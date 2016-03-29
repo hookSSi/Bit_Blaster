@@ -3,13 +3,40 @@ using System.Collections;
 
 public class Spawn_Script : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    private float m_SpawnRate = 1;
+    private Direction m_SpawnDirection;
+
+    public GameObject m_SpawnObject;
+    public Map_Script m_Map;
+    public enum Direction
+    {
+        Up, Down, Right, Left
+    }
+
+
+    void Awake ()
+    {
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 	
 	}
+
+    void Spawn()
+    {
+        switch(m_SpawnDirection)
+        {
+            case Direction.Up:
+                Instantiate(m_SpawnObject, new Vector2(Random.Range(-m_Map.X, -m_Map.X), m_Map.Y),);
+                break;
+            case Direction.Down:
+                break;
+            case Direction.Right:
+                break;
+            case Direction.Left:
+                break;
+        }
+    }
 }
