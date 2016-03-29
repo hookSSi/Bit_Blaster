@@ -13,11 +13,6 @@ public class FlightObject_Script : MonoBehaviour {
     {
         m_Rigid = GetComponent<Rigidbody2D>();
     }
-	
-	void FixedUpdate ()
-    {
-        Move();
-    }
 
     protected virtual void Move()
     {
@@ -38,6 +33,7 @@ public class FlightObject_Script : MonoBehaviour {
     public void SetDirection(Vector2 p_Direction)
     {
         m_Direction = p_Direction;
+        //transform.eulerAngles = new Vector3(0, 0, );
     }
 
     public void SetMaxVelocity(float p_MaxVelocity)
