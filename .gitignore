@@ -1,6 +1,7 @@
 Library/*
 obj/*
 temp/*
+ProjectSettings/*
 *.csproj
 *.suo
 *.sln
