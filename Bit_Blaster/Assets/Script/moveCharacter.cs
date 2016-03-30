@@ -6,13 +6,13 @@ public class moveCharacter : MonoBehaviour
 
     public float characterSpeed = 2;
 
-    void Start ()
+    void Start()
     {
-	    
-	}
-	
 
-	void Update ()
+    }
+
+
+    void Update()
     {
         move();
 
@@ -26,8 +26,11 @@ public class moveCharacter : MonoBehaviour
 
         Vector2 movement = new Vector2(dirX, dirY);
 
+        Vector3 angle = new Vector3(0, 0, dirY);
+
+        gameObject.transform.Rotate(angle, Space.Self);
+
         GetComponent<Rigidbody2D>().velocity = movement * characterSpeed;
 
     }
-
 }
