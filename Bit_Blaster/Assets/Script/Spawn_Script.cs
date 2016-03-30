@@ -29,7 +29,7 @@ public class Spawn_Script : MonoBehaviour {
         switch(m_SpawnDirection)
         {
             case Direction.Up:
-                Instantiate(m_SpawnObject, new Vector2(Random.Range(-m_Map.X, -m_Map.X), m_Map.Y),);
+                Instantiate(m_SpawnObject, new Vector2(Random.Range(-m_Map.X, -m_Map.X), m_Map.Y), transform.rotation);
                 break;
             case Direction.Down:
                 break;

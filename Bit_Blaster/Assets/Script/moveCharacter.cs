@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class moveCharacter : MonoBehaviour
-{
-
-    public float characterSpeed = 2;
+public class moveCharacter : Map_Script
+{ 
+    public float characterSpeed = 5;
 
     void Start()
     {
@@ -14,11 +13,11 @@ public class moveCharacter : MonoBehaviour
 
     void Update()
     {
-        move();
+        Move();
 
     }
 
-    void move()
+    void Move()
     {
         float dirX = Input.GetAxis("Horizontal");
 
@@ -26,11 +25,20 @@ public class moveCharacter : MonoBehaviour
 
         Vector2 movement = new Vector2(dirX, dirY);
 
-        Vector3 angle = new Vector3(0, 0, dirY);
+        Debug.Log("X " + dirX);
 
-        gameObject.transform.Rotate(angle, Space.Self);
+        Debug.Log("Y " + dirY);
+
+        float angle = Mathf.Atan2(dirX, dirY) * Mathf.Rad2Deg;
+
+        gameObject.transform.eulerAngles = new Vector3(0, 0, -angle);
 
         GetComponent<Rigidbody2D>().velocity = movement * characterSpeed;
+
+    }
+
+    void BulletFire()
+    {
 
     }
 }
