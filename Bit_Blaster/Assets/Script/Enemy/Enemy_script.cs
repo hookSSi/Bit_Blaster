@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy_script : FlightObject_Script {
 
-    private bool m_IsAlive = true;
+    protected bool m_IsAlive = true;
     private int m_HealthPoint = 3; // 체력
     private float m_FireRate = 1; // 발사 주기
 
@@ -15,7 +15,6 @@ public class Enemy_script : FlightObject_Script {
 
     void Awake ()
     {
-        SetDirection(Vector2.down);
         m_Rigid = GetComponent<Rigidbody2D>();
         InvokeRepeating("FireBullet", 1f, m_FireRate);
     }
@@ -46,7 +45,7 @@ public class Enemy_script : FlightObject_Script {
 
     protected virtual void FireBullet() // 공격 처리
     {
-        Instantiate(m_Bullet, m_FirePosition.position,transform.rotation);
+        Instantiate(m_Bullet, m_FirePosition.position, Quaternion.identity);
     }
 
     public void SetHelthPoint(int p_HealthPoint)

@@ -7,7 +7,7 @@ public class FlightObject_Script : MonoBehaviour {
     protected Rigidbody2D m_Rigid; // rigidbody
     private Vector2 m_Direction = Vector2.down; // 방향
     private float m_MaxVelocity = 1f; // 최대 속도
-    private float m_ForceScale = 1f; // 힘크기
+    private float m_ForceScale = 100f; // 힘크기
 
     void Awake ()
     {
@@ -33,7 +33,7 @@ public class FlightObject_Script : MonoBehaviour {
     public void SetDirection(Vector2 p_Direction)
     {
         m_Direction = p_Direction;
-        //transform.eulerAngles = new Vector3(0, 0, );
+        transform.eulerAngles = new Vector3(0, 0, Vector2.Dot(p_Direction,new Vector2(0,1)));
     }
 
     public void SetMaxVelocity(float p_MaxVelocity)

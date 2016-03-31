@@ -3,39 +3,46 @@ using System.Collections;
 
 public class Spawn_Script : MonoBehaviour {
 
-    private float m_SpawnRate = 1;
-    private Direction m_SpawnDirection;
 
-    public GameObject m_SpawnObject;
+    private int m_ObjectCount = 10; // 최대 생성 수
+    private float m_SpawnRate = 1; // 스폰 주기
+    private Direction m_SpawnLocation = Direction.Down; // 스폰 위치
+
+    public GameObject m_Prefab;
     public Map_Script m_Map;
+
     public enum Direction
     {
         Up, Down, Right, Left
     }
-
-
-    void Awake ()
-    {
-	
-	}
 	
 	void Update ()
     {
-	
-	}
+        if (Input.GetKeyDown(KeyCode.A))
+            Spawn();
+    }
 
     void Spawn()
     {
-        switch(m_SpawnDirection)
+      //  GameObject forSpawn = m_Prefab;
+
+        switch (m_SpawnLocation)
         {
             case Direction.Up:
-                Instantiate(m_SpawnObject, new Vector2(Random.Range(-m_Map.X, -m_Map.X), m_Map.Y),);
+                Instantiate(m_Prefab, new Vector2(Random.Range(-m_Map.X, m_Map.X), m_Map.Y), Quaternion.identity);
+              //  m_Prefab.SetDirection(Vector2.down);
                 break;
-            case Direction.Down:
+            case Direction.Down:               
+                Instantiate(m_Prefab, new Vector2(Random.Range(-m_Map.X, m_Map.X), -m_Map.Y), Quaternion.identity);
+               // m_Prefab.SetDirection(Vector2.up);
                 break;
-            case Direction.Right:
+            case Direction.Right:                
+                Instantiate(m_Prefab, new Vector2(m_Map.X, Random.Range(-m_Map.Y, m_Map.Y)), Quaternion.identity);
+               // m_Prefab.SetDirection(Vector2.left);
                 break;
-            case Direction.Left:
+            case Direction.Left:            
+                Instantiate(m_Prefab, new Vector2(-m_Map.X, Random.Range(-m_Map.Y, m_Map.Y)), Quaternion.identity);
+               // m_Prefab.SetDirection(Vector2.right);
                 break;
         }
     }
