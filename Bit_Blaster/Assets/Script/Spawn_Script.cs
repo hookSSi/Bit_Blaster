@@ -8,6 +8,8 @@ public class Spawn_Script : MonoBehaviour {
     private float m_SpawnRate = 1; // 스폰 주기
     private Direction m_SpawnLocation = Direction.Down; // 스폰 위치
 
+    public GameObject m_SpawnObject;
+
     public GameObject m_Prefab;
     public Map_Script m_Map;
 
@@ -29,12 +31,12 @@ public class Spawn_Script : MonoBehaviour {
         switch (m_SpawnLocation)
         {
             case Direction.Up:
-<<<<<<< HEAD
+//<<<<<<< HEAD
                 Instantiate(m_Prefab, new Vector2(Random.Range(-m_Map.X, m_Map.X), m_Map.Y), Quaternion.identity);
               //  m_Prefab.SetDirection(Vector2.down);
-=======
+//=======
                 Instantiate(m_SpawnObject, new Vector2(Random.Range(-m_Map.X, -m_Map.X), m_Map.Y), transform.rotation);
->>>>>>> b1d9c82ce9a61ef7a89a3c4c25c21c54418e2400
+//>>>>>>> b1d9c82ce9a61ef7a89a3c4c25c21c54418e2400
                 break;
             case Direction.Down:               
                 Instantiate(m_Prefab, new Vector2(Random.Range(-m_Map.X, m_Map.X), -m_Map.Y), Quaternion.identity);
