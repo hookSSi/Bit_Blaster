@@ -29,8 +29,12 @@ public class Spawn_Script : MonoBehaviour {
         switch (m_SpawnLocation)
         {
             case Direction.Up:
+<<<<<<< HEAD
                 Instantiate(m_Prefab, new Vector2(Random.Range(-m_Map.X, m_Map.X), m_Map.Y), Quaternion.identity);
               //  m_Prefab.SetDirection(Vector2.down);
+=======
+                Instantiate(m_SpawnObject, new Vector2(Random.Range(-m_Map.X, -m_Map.X), m_Map.Y), transform.rotation);
+>>>>>>> b1d9c82ce9a61ef7a89a3c4c25c21c54418e2400
                 break;
             case Direction.Down:               
                 Instantiate(m_Prefab, new Vector2(Random.Range(-m_Map.X, m_Map.X), -m_Map.Y), Quaternion.identity);
