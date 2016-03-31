@@ -15,7 +15,13 @@ public class MoveCharacter : FlightObject_Script
 
     bool canAttack = true;
 
+    float dirX;
+
+    float dirY;
+
     float angle;
+
+    Vector2 movement;
 
     void Start()
     {
@@ -33,19 +39,23 @@ public class MoveCharacter : FlightObject_Script
 
     void Move()
     {
-        float dirX = Input.GetAxis("Horizontal");
+        dirX = Input.GetAxis("Horizontal");
 
-        float dirY = Input.GetAxis("Vertical");
-
-        Vector2 movement = new Vector2(dirX, dirY);
-
-     //   Debug.Log("X " + dirX);
-
-      //  Debug.Log("Y " + dirY);
+        dirY = Input.GetAxis("Vertical");
 
         angle = Mathf.Atan2(dirX, dirY) * Mathf.Rad2Deg;
 
-        gameObject.transform.eulerAngles = new Vector3(0, 0, -angle);
+        movement = new Vector2(dirX, dirY);
+
+        if (dirX == 0 && dirY == 0)
+        {
+
+        }
+
+        else
+        {
+            gameObject.transform.eulerAngles = new Vector3(0, 0, -angle);
+        }
 
         GetComponent<Rigidbody2D>().velocity = movement * m_CharacterSpeed;
 
@@ -66,9 +76,9 @@ public class MoveCharacter : FlightObject_Script
     {
         canAttack = false;
 
-        m_MissileTemp = Instantiate(m_Weapon, new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0,0,-angle)) as GameObject;
+        m_MissileTemp = Instantiate(m_Weapon, new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle)) as GameObject;
 
-        yield return new WaitForSeconds(m_AttackSpeed);
+        yield return new WaitForSeconds(m_Weapon.GetComponent<Bullet>().m_AttackDelay);
 
         canAttack = true;
     }

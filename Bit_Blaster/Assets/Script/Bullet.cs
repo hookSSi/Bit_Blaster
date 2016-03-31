@@ -3,19 +3,17 @@ using System.Collections;
 
 public class Bullet : FlightObject_Script
 {
-    public float m_AttackSpeed;
+    public float m_AttackDelay;
 
     public float m_BulletSpeed;
 
-    public float m_BulletMaintainTime;
-
     public float m_Damage;
 
-    Vector2 m_InstantiatePosition;
+    Vector2 m_InstantiatedPosition;
 
     void Start()
     {
-        Vector2 m_InstantiatePosition = gameObject.transform.position;
+        Vector2 m_InstantiatedPosition = gameObject.transform.position;
     }
 
 	void Update ()
@@ -33,7 +31,7 @@ public class Bullet : FlightObject_Script
 
     void KillBulletCheck()
     {
-        if (Vector2.Distance(m_InstantiatePosition, transform.position) >= 5)
+        if (Vector2.Distance(m_InstantiatedPosition, transform.position) >= 5)
         {
             Destroy(gameObject);
         }
