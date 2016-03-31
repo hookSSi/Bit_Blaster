@@ -1,7 +1,6 @@
-Library/*
-obj/*
-temp/*
-ProjectSettings/*
+Bit_Blaster/Library/*
+Bit_Blaster/temp/*
+Bit_Blaster/ProjectSettings/*
 *.csproj
 *.suo
 *.sln
