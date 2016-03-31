@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveCharacter : FlightObject_Script
+public class moveCharacter : FlightObject_Script
 {
     public float m_CharacterSpeed;
 
@@ -31,7 +31,7 @@ public class MoveCharacter : FlightObject_Script
 
     }
 
-    void Move()
+    protected override void Move()
     {
         float dirX = Input.GetAxis("Horizontal");
 

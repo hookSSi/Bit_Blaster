@@ -13,15 +13,13 @@ public class Map_Script: MonoBehaviour {
 
     private LineRenderer lineRenderer;
 
-	// Use this for initialization
-    void Start()
+    void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.SetColors(m_StartColor, m_EndColor);
         lineRenderer.SetWidth(0.1f, 0.1f);
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         DrawOutLine();

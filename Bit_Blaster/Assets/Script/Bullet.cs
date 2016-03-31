@@ -25,10 +25,9 @@ public class Bullet : FlightObject_Script
         KillBulletCheck();
 	}
 
-    void Move()
+    protected override void Move()
     {
         gameObject.transform.Translate(Vector2.up * (m_BulletSpeed / 100));
-
     }
 
     void KillBulletCheck()
