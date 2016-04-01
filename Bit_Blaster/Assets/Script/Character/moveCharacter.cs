@@ -3,84 +3,85 @@ using System.Collections;
 
 public class moveCharacter : FlightObject_Script
 {
-    public float m_CharacterSpeed;
+	public float m_CharacterSpeed;
 
-    GameObject m_FirePoint;
+	GameObject m_FirePoint;
 
-    public GameObject m_Weapon;
+	public GameObject m_Weapon;
 
-    GameObject m_MissileTemp;
+	GameObject m_MissileTemp;
 
-    public float m_AttackSpeed = 0.2f;
+	public float m_AttackSpeed = 0.2f;
 
-    bool canAttack = true;
+	bool canAttack = true;
 
-    float dirX;
+	float dirX;
 
-    float dirY;
+	float dirY;
 
-    float angle;
+	float angle;
 
-    Vector2 movement;
+	Vector2 movement;
 
-    void Start()
-    {
-        m_FirePoint = transform.FindChild("m_FirePosition").gameObject;
-    }
+	void Start()
+	{
+		m_FirePoint = transform.FindChild("m_FirePosition").gameObject;
+	}
 
 
-    void Update()
-    {
-        Move();
+	void Update()
+	{
+		Move();
 
-        AttackCheck();
+		AttackCheck();
 
-    }
+	}
 
-    protected override void Move()
-    {
-        dirX = Input.GetAxis("Horizontal");
+	protected override void Move()
+	{
+		dirX = Input.GetAxis("Horizontal");
 
-        dirY = Input.GetAxis("Vertical");
+		dirY = Input.GetAxis("Vertical");
 
-        angle = Mathf.Atan2(dirX, dirY) * Mathf.Rad2Deg;
+		angle = Mathf.Atan2(dirX, dirY) * Mathf.Rad2Deg;
 
-        movement = new Vector2(dirX, dirY);
+		movement = new Vector2(dirX, dirY);
 
-        if (dirX == 0 && dirY == 0)
-        {
+		if (dirX == 0 && dirY == 0)
+		{
 
-        }
+		}
 
-        else
-        {
-            gameObject.transform.eulerAngles = new Vector3(0, 0, -angle);
-        }
+		else
+		{
+			gameObject.transform.eulerAngles = new Vector3(0, 0, -angle);
+		}
 
-        GetComponent<Rigidbody2D>().velocity = movement * m_CharacterSpeed;
+		GetComponent<Rigidbody2D>().velocity = movement * m_CharacterSpeed;
 
-    }
+	}
 
-    void AttackCheck()
-    {
+	void AttackCheck()
+	{
 
-        if (Input.GetButtonDown("Fire1") && canAttack == true)
-        {
-            StartCoroutine("Fire");
+		if (/*Input.GetButtonDown("Fire1") && */canAttack == true)
+		{
+			StartCoroutine("Fire");
 
-            Debug.Log("attack");
-        }
-    }
+			Debug.Log("attack");
+		}
+	}
 
-    IEnumerator Fire()
-    {
-        canAttack = false;
+	IEnumerator Fire()
+	{
+		canAttack = false;
 
-        m_MissileTemp = Instantiate(m_Weapon, new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle)) as GameObject;
+		// m_MissileTemp = Instantiate(m_Weapon, new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle)) as GameObject;
+		this.GetComponent<ShootBullet>().Shoot(this.transform.eulerAngles.z);
 
-        yield return new WaitForSeconds(m_Weapon.GetComponent<Bullet>().m_AttackDelay);
+		yield return new WaitForSeconds(m_Weapon.GetComponent<Bullet>().m_AttackDelay);
 
-        canAttack = true;
-    }
+		canAttack = true;
+	}
 
 }
