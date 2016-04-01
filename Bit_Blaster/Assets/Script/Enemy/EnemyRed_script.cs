@@ -9,7 +9,7 @@ public class EnemyRed_script : Enemy_script {
     {
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.down);
-        m_Velocity = 2f;
+        m_Velocity = 3f;
         m_HealthPoint = 1;
     }
 

@@ -38,15 +38,19 @@ public class Enemy_script : FlightObject_Script {
 
     protected void OnTriggerEnter2D(Collider2D p_other) // 충돌 처리
     {
-        if (p_other.tag == "PlayerBullet")
+        if (p_other.tag == "PlayerBullet") // 총알에 충돌 했을 때
         {
             m_HealthPoint--;
             if (m_HealthPoint == 0)
             {
                 Destroy(p_other);
                 m_IsAlive = false;
-            }
-                
+            }     
+        }
+
+        else if(p_other.tag == "Player") // 플레이어와 충돌 했을 때
+        {
+            m_IsAlive = false;
         }
     }
 

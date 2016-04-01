@@ -79,7 +79,7 @@ public class moveCharacter : FlightObject_Script
 		// m_MissileTemp = Instantiate(m_Weapon, new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle)) as GameObject;
 		this.GetComponent<ShootBullet>().Shoot(this.transform.eulerAngles.z);
 
-		yield return new WaitForSeconds(m_Weapon.GetComponent<Bullet>().m_AttackDelay);
+		yield return new WaitForSeconds(1f);
 
 		canAttack = true;
 	}
