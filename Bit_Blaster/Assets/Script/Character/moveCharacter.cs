@@ -67,8 +67,6 @@ public class moveCharacter : FlightObject_Script
 		if (/*Input.GetButtonDown("Fire1") && */canAttack == true)
 		{
 			StartCoroutine("Fire");
-
-			Debug.Log("attack");
 		}
 	}
 

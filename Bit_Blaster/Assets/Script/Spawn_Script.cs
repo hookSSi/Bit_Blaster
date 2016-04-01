@@ -1,35 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Spawn_Script : MonoBehaviour {
 
 
     private int m_MaxCount; // 최대 생성 수
-    private int m_Count;
     private float m_SpawnRate1; // 스폰 주기 invoke 함수 실행 주기
     private int m_SpawnRate2; // 랜덤의 범위
     private int m_SpawnLocation; // 스폰 위치
-    private FlightObject_Script ForSpawn;
+    private FlightObject_Script ForSpawn; // 생성용 객체
 
-    public FlightObject_Script[] m_Prefab;
-    public Map_Script m_Map;
+    public FlightObject_Script[] m_Prefab; // 적 종류 배열
+    public Map_Script m_Map; // 기준 맵
+
+    public int m_Count; // 갯수
 	
     void Awake()
     {
         m_Count = 0;
-        m_MaxCount = 100;
-        m_SpawnRate1 = 0.5f;
-        m_SpawnRate2 = 10;
-
-        if (m_Count > m_MaxCount)
-            CancelInvoke("Spawn");
-        else if(!IsInvoking() && m_Count <= m_MaxCount)
-            InvokeRepeating("Spawn", 1, m_SpawnRate1);
+        m_MaxCount = 30;
+        m_SpawnRate1 = 0.1f;
+        m_SpawnRate2 = 5;
     }
 
-	void Update ()
+    void Update()
     {
-   
+        Debug.Log(m_Count);
+        m_Count = transform.GetChildCount();
+
+        if (m_Count == m_MaxCount)
+            CancelInvoke("Spawn");
+        else if (!IsInvoking() && m_Count <= m_MaxCount)
+            InvokeRepeating("Spawn", 1, m_SpawnRate1);
     }
 
     void Spawn() // 스폰
@@ -55,7 +58,7 @@ public class Spawn_Script : MonoBehaviour {
                 ForSpawn.SetDirection(Vector2.right);
                 break;
         }
-
+        ForSpawn.transform.parent = this.transform;
         m_Count++;
     }
 

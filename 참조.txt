@@ -1,0 +1,7 @@
+- 유니티 2D 게임 공작소 -
+
+311쪽 - FireBullet 스크립트
+
+- 유니티와 깃 사용법(ignore에 관한 이야기) -
+
+http://www.slideshare.net/holykss/git-24792958

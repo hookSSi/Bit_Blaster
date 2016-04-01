@@ -25,7 +25,9 @@ public class Enemy_script : FlightObject_Script {
     void Update()
     {
         if (m_IsAlive == false)
+        {
             Destroy(this.gameObject);
+        }     
     }
 
 	void FixedUpdate ()

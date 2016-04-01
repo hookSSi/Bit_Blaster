@@ -17,6 +17,7 @@ public class EnemyGreen_script : Enemy_script
     {
         if (m_IsAlive == false)
             Destroy(this.gameObject);
+        OutObjectDestroySelf();
     }
 
     void FixedUpdate()
