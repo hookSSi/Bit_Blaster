@@ -8,6 +8,8 @@ public class FlightObject_Script : MonoBehaviour {
     protected Vector2 m_Direction; // 방향
     protected float m_Velocity; // 최대 속도
 
+    bool Saw = false;
+
     void Awake()
     {
         m_Rigid = GetComponent<Rigidbody2D>(); // rigidbody
@@ -25,10 +27,10 @@ public class FlightObject_Script : MonoBehaviour {
         return (int)(a / Mathf.Abs(a));
     }
 
-    public void OutObjectDestroySelf() // 화면 밖을 나가면 삭제
+    public void DestroyOutOfMap()
     {
-        Vector2 view = Camera.main.WorldToScreenPoint(transform.position);
-        if(view.y < -50 || view.x < -50 || view.y > 450 || view.x > 600)
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        if (screenPosition.y > Screen.height+10 || screenPosition.y < -10 || screenPosition.x > Screen.width+10 || screenPosition.x < -10)
         {
             Destroy(gameObject);
         }

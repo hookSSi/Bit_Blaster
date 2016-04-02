@@ -34,8 +34,7 @@ public class Enemy_script : FlightObject_Script {
             DropItem();
             Destroy(this.gameObject);
         }
-
-        OutObjectDestroySelf();
+        DestroyOutOfMap();
     }
 
 	void FixedUpdate ()
@@ -43,8 +42,8 @@ public class Enemy_script : FlightObject_Script {
         if(m_IsAlive)
         {
             Move();    
-        }
-	}
+        }  
+    }
 
     protected void OnTriggerEnter2D(Collider2D p_other) // 충돌 처리
     {
