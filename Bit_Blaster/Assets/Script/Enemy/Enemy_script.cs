@@ -51,7 +51,6 @@ public class Enemy_script : FlightObject_Script {
         if (p_other.tag == "PlayerBullet") // 총알에 충돌 했을 때
         {
             m_HealthPoint--;
-            Destroy(p_other.gameObject);
 
             if (m_HealthPoint == 0)
                 m_IsAlive = false;   

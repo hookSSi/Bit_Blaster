@@ -47,7 +47,6 @@ public class BigRedBullet : FlightObject_Script
 				subBullet.GetComponent<PlayerBullet>().SetEulerAngleZ(this.transform.eulerAngles.z + (i * 10));
 				Instantiate(subBullet, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
 			}
-
 			Destroy(gameObject);
 		}
 	}
