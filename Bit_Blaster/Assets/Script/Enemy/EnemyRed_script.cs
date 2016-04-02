@@ -11,6 +11,7 @@ public class EnemyRed_script : Enemy_script {
         SetDirection(Vector2.down);
         m_Velocity = 3f;
         m_HealthPoint = 1;
+        m_Score = 100;
     }
 
     protected override void Move()

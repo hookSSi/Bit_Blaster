@@ -28,7 +28,7 @@ public class FlightObject_Script : MonoBehaviour {
     public void OutObjectDestroySelf() // 화면 밖을 나가면 삭제
     {
         Vector2 view = Camera.main.WorldToScreenPoint(transform.position);
-        if(view.y < -50 || view.x < -50 || view.y > 400 || view.x > 500)
+        if(view.y < -50 || view.x < -50 || view.y > 450 || view.x > 600)
         {
             Destroy(gameObject);
         }
