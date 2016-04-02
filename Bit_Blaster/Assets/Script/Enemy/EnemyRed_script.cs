@@ -10,7 +10,7 @@ public class EnemyRed_script : Enemy_script {
     {
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.down);
-        m_Velocity = 3f;
+        m_Velocity = 2f;
         m_HealthPoint = 1;
         m_Score = 100;
     }
@@ -26,7 +26,6 @@ public class EnemyRed_script : Enemy_script {
         }
         else
         {
-            
             Vector2 vec = new Vector2(x, y);
             SetDirection(vec.normalized);
             m_Rigid.velocity = m_Direction * m_Velocity;

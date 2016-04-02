@@ -26,11 +26,15 @@ public class Spawn_Script : MonoBehaviour {
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+            Time.timeScale = 0;
+ 
+
         m_Count = transform.GetChildCount();
 
-        if (m_Count == m_MaxCount)
+        if (m_Count == m_MaxCount || Time.timeScale == 0)
             CancelInvoke("SpawnManager");
-        else if (!IsInvoking() && m_Count <= m_MaxCount)
+        else if (!IsInvoking() && m_Count <= m_MaxCount && Time.timeScale != 0)
             InvokeRepeating("SpawnManager", 1, m_SpawnRate1);
     }
 

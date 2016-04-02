@@ -34,8 +34,7 @@ public class Enemy_script : FlightObject_Script {
             DropItem();
             Destroy(this.gameObject);
         }
-
-        OutObjectDestroySelf();
+        DestroyOutOfMap();
     }
 
 	void FixedUpdate ()
@@ -43,19 +42,18 @@ public class Enemy_script : FlightObject_Script {
         if(m_IsAlive)
         {
             Move();    
-        }
-	}
+        }  
+    }
 
     protected void OnTriggerEnter2D(Collider2D p_other) // 충돌 처리
     {
         if (p_other.tag == "PlayerBullet") // 총알에 충돌 했을 때
         {
             m_HealthPoint--;
+            Destroy(p_other.gameObject);
+
             if (m_HealthPoint == 0)
-            {
-                Destroy(p_other);
-                m_IsAlive = false;
-            }     
+                m_IsAlive = false;   
         }
 
         else if(p_other.tag == "Player") // 플레이어와 충돌 했을 때
@@ -75,7 +73,7 @@ public class Enemy_script : FlightObject_Script {
         int value2 = Random.Range(0, m_Item.Length);
 
         if (value1 == value2 && m_Item.Length > 0)
-            Instantiate(m_Item[value2]);
+            Instantiate(m_Item[value2],transform.position, Quaternion.identity);
     }
 
     /* Get,Set */
