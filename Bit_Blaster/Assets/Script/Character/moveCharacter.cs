@@ -7,7 +7,7 @@ public class moveCharacter : FlightObject_Script
 
 	GameObject m_FirePoint;
 
-	public GameObject m_Weapon;
+	public GameObject[] m_Weapon;
 
 	GameObject m_MissileTemp;
 
@@ -21,11 +21,14 @@ public class moveCharacter : FlightObject_Script
 
 	float angle;
 
+	private int itemIndex;
+
 	Vector2 movement;
 
 	void Start()
 	{
 		m_FirePoint = transform.FindChild("m_FirePosition").gameObject;
+		itemIndex = 0;
 	}
 
 
@@ -74,10 +77,13 @@ public class moveCharacter : FlightObject_Script
 	{
 		canAttack = false;
 
-		// m_MissileTemp = Instantiate(m_Weapon, new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle)) as GameObject;
-		this.GetComponent<ShootBullet>().Shoot();
+		//m_MissileTemp = Instantiate(m_Weapon[itemIndex], new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle)) as GameObject;
+		//this.GetComponent<ShootBullet>().Shoot();
+		m_Weapon[itemIndex].GetComponent<PlayerBullet>().SetEulerAngleZ(this.transform.eulerAngles.z);
+		Instantiate(m_Weapon[itemIndex], new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle));
 
-		yield return new WaitForSeconds(this.GetComponent<ShootBullet>().GetBulletDelay());
+		Debug.Log(m_Weapon[itemIndex].GetComponent<PlayerBullet>().GetBulletDelay());
+		yield return new WaitForSeconds(m_Weapon[itemIndex].GetComponent<PlayerBullet>().GetBulletDelay());
 
 		canAttack = true;
 	}
