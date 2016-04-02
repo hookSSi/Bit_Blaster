@@ -94,14 +94,23 @@ public class moveCharacter : FlightObject_Script
 		canAttack = true;
 	}
 
-	private void OnTriggerEnter2D(Collider2D col)
-	{
-		if (col.gameObject.tag == "Item")
-		{
-			itemIndex = col.GetComponent<MoveItem>().GetItemNumber();
-			Destroy(col.gameObject);
-		}
-	}
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Item")
+        {
+            itemIndex = col.GetComponent<MoveItem>().GetItemNumber();
+            Destroy(col.gameObject);
+        }
+
+        else if (col.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+
+            Application.LoadLevel("GameOver");
+        }
+
+
+    }
 
 	public float GetEulerAngleZ()
 	{

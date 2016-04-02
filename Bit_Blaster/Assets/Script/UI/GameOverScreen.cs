@@ -11,7 +11,7 @@ public class GameOverScreen : MonoBehaviour
 
     void Start ()
     {
-        point = GameObject.Find("point");
+        point = GameObject.Find("ScoreStorage");
 
         pointShow = GameObject.Find("Score");
 
@@ -25,6 +25,6 @@ public class GameOverScreen : MonoBehaviour
 
     void SroceShow()
     {
-        pointShow.GetComponent<Text>().text = "아차 점수는 " + point.GetComponent<Text>().text + "점";
+        pointShow.GetComponent<Text>().text = "아차 점수는 " + point.GetComponent<ScoreStorage>().Score + "점";
     }
 }
