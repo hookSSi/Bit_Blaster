@@ -30,7 +30,7 @@ public class MoveBullet1 : ShootBullet
 	{
 		this.bulletAngle = nAngle;
 	}
-
+    
 	private void CheckPosition()
 	{
 		if (Mathf.Abs(playerTransform.position.x - this.transform.position.x) > 20
@@ -39,4 +39,5 @@ public class MoveBullet1 : ShootBullet
 			Destroy(this.gameObject);
 		}
 	}
+    
 }
