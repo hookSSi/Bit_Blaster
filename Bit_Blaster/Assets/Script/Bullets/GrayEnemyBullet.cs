@@ -25,13 +25,11 @@ public class GrayEnemyBullet : FlightObject_Script
 
 	protected override void Move()
 	{
-		this.transform.position += new Vector3(-Mathf.Sin(bulletAngle * Mathf.Deg2Rad) * speed, Mathf.Cos(bulletAngle * Mathf.Deg2Rad) * speed, 0);
+		this.transform.position += new Vector3(-Mathf.Sin(bulletAngle) * speed, -Mathf.Cos(bulletAngle) * speed, 0);
 	}
 
 	public void SetEulerAngleZ(float nAngle)
 	{
-		GameObject tmpPlayer = GameObject.FindWithTag("Player");
 		this.bulletAngle = nAngle;
-		bulletAngle = Mathf.Atan2(tmpPlayer.transform.position.y - this.transform.position.y, tmpPlayer.transform.position.x - this.transform.position.x) * Mathf.Rad2Deg;
 	}
 }

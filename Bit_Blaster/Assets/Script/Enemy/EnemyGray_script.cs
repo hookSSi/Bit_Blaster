@@ -1,25 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyGray_script : Enemy_script {
+public class EnemyGray_script : Enemy_script
+{
 
-	void Start ()
-    {
-        m_Rigid = GetComponent<Rigidbody2D>();
-        SetDirection(Vector2.down);
-        m_Velocity = 1f;
-        m_HealthPoint = 10;
-        m_FireRate = 0.8f;
-        m_Score = 500;
-        m_DropChance = 10;
-    }
+	void Awake()
+	{
+		m_Rigid = GetComponent<Rigidbody2D>();
+		SetDirection(Vector2.down);
+		m_Velocity = 1f;
+		m_HealthPoint = 10;
+		m_FireRate = 2.5f;
+		m_Score = 500;
+		m_DropChance = 10;
+		InvokeRepeating("FireBullet", 1f, m_FireRate);
+	}
 
-    protected override void FireBullet() // 공격 처리
-    {
-        for (int i = 0; i < 7; i++)
-        {
-            //m_Bullet.GetComponent<MoveBullet1>().SetAngle((GetEulerAngleZ() - 30) + (i * 10));
-            Instantiate(m_Bullet, m_FirePosition.position, Quaternion.identity);
-        }
-    }
+	protected override void FireBullet() // 공격 처리
+	{
+		GameObject tmpPlayer = GameObject.FindWithTag("Player");
+		float tmpAngle;
+
+		tmpAngle = Mathf.Atan2(this.transform.position.x - tmpPlayer.transform.position.x, this.transform.position.y - tmpPlayer.transform.position.y);
+		m_Bullet.GetComponent<GrayEnemyBullet>().SetEulerAngleZ(tmpAngle);
+		Instantiate(m_Bullet, m_FirePosition.position, Quaternion.Euler(new Vector3(0, 0, this.transform.eulerAngles.z)));
+	}
 }
