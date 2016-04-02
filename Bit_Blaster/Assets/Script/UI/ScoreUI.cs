@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 
-public class UI : MonoBehaviour
+public class ScoreUI : MonoBehaviour
 {
 
     bool m_TimeCheck = true;

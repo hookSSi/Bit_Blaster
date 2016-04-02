@@ -37,6 +37,8 @@ public class DeadCharacter : MonoBehaviour
 
 
             Destroy(gameObject);
+
+            Application.LoadLevel("GameOver");
         }
     }
 }
