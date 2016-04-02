@@ -23,7 +23,7 @@ public class moveCharacter : FlightObject_Script
 
     Vector2 m_TempMovement;
 
-    private int itemIndex;
+    public int itemIndex;
 
 	Vector2 movement;
 
@@ -66,7 +66,7 @@ public class moveCharacter : FlightObject_Script
 
         //GetComponent<Rigidbody2D>().velocity = movement * m_CharacterSpeed;
         gameObject.transform.Translate(Vector2.up * m_CharacterSpeed * Time.timeScale * Time.deltaTime );
-        Debug.Log(Time.deltaTime);
+        //Debug.Log(Time.deltaTime);
     }
 
 	void AttackCheck()
@@ -84,13 +84,23 @@ public class moveCharacter : FlightObject_Script
 
 		//m_MissileTemp = Instantiate(m_Weapon[itemIndex], new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle)) as GameObject;
 		//this.GetComponent<ShootBullet>().Shoot();
-		m_Weapon[itemIndex].GetComponent<PlayerBullet>().SetEulerAngleZ(this.transform.eulerAngles.z);
+		if (itemIndex == 0) m_Weapon[itemIndex].GetComponent<PlayerBullet>().SetEulerAngleZ(this.transform.eulerAngles.z);
+		else if(itemIndex == 1) m_Weapon[itemIndex].GetComponent<BigRedBullet>().SetEulerAngleZ(this.transform.eulerAngles.z);
 		Instantiate(m_Weapon[itemIndex], new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle));
 
-		Debug.Log(m_Weapon[itemIndex].GetComponent<PlayerBullet>().GetBulletDelay());
-		yield return new WaitForSeconds((m_Weapon[itemIndex].GetComponent<PlayerBullet>().GetBulletDelay() * 50) * (1/Time.timeScale) * Time.deltaTime);
+		//Debug.Log(m_Weapon[itemIndex].GetComponent<PlayerBullet>().GetBulletDelay());
+		yield return new WaitForSeconds((0.2f * 50) * (1/Time.timeScale) * Time.deltaTime);
 
 		canAttack = true;
+	}
+
+	private void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col.gameObject.tag == "Item")
+		{
+			itemIndex = col.GetComponent<MoveItem>().GetItemNumber();
+			Destroy(col.gameObject);
+		}
 	}
 
 	public float GetEulerAngleZ()
