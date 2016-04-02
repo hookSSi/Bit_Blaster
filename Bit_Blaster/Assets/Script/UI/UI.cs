@@ -14,6 +14,8 @@ public class UI : MonoBehaviour
 
     GameObject m_PointTaxt;
 
+    bool Pause = true;
+
     void Start ()
     {
         m_PointTaxt = GameObject.Find("Point");
@@ -22,6 +24,8 @@ public class UI : MonoBehaviour
 	void Update ()
     {
         EarnScoreCheck();
+
+        PauseGame();
     }
 
     void EarnScoreCheck()
@@ -46,4 +50,22 @@ public class UI : MonoBehaviour
         m_TimeCheck = true;
     }
 
+    void PauseGame()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (Pause == true)
+            {
+                Time.timeScale = 0;
+
+                Pause = false;
+            }
+            else
+            {
+                Time.timeScale = 1;
+
+                Pause = true;
+            }
+        }
+    }
 }

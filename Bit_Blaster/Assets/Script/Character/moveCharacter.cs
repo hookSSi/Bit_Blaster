@@ -65,7 +65,8 @@ public class moveCharacter : FlightObject_Script
 		}
 
         //GetComponent<Rigidbody2D>().velocity = movement * m_CharacterSpeed;
-        gameObject.transform.Translate(Vector2.up * (m_CharacterSpeed/50));
+        gameObject.transform.Translate(Vector2.up * m_CharacterSpeed * Time.timeScale * Time.deltaTime );
+        Debug.Log(Time.deltaTime);
     }
 
 	void AttackCheck()
@@ -87,7 +88,7 @@ public class moveCharacter : FlightObject_Script
 		Instantiate(m_Weapon[itemIndex], new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle));
 
 		Debug.Log(m_Weapon[itemIndex].GetComponent<PlayerBullet>().GetBulletDelay());
-		yield return new WaitForSeconds(m_Weapon[itemIndex].GetComponent<PlayerBullet>().GetBulletDelay());
+		yield return new WaitForSeconds((m_Weapon[itemIndex].GetComponent<PlayerBullet>().GetBulletDelay() * 50) * (1/Time.timeScale) * Time.deltaTime);
 
 		canAttack = true;
 	}
