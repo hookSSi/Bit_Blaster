@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShootBullet : MonoBehaviour
+public class ShootBullet : moveCharacter
 {
 	public GameObject Bullet;
 	public GameObject FirePosition;
@@ -21,20 +21,20 @@ public class ShootBullet : MonoBehaviour
 		
 	}
 
-	public void Shoot(float nCharacterAngle)
+	public void Shoot()
 	{
 		if (this.pattern == 1)
 		{
 			for (int i = 0; i < 7; i++)
 			{
-				Bullet.GetComponent<MoveBullet1>().SetAngle((nCharacterAngle - 30) + (i * 10));
+				Bullet.GetComponent<MoveBullet1>().SetAngle((GetEulerAngleZ() - 30) + (i * 10));
 				Instantiate(Bullet, new Vector2(FirePosition.transform.position.x, FirePosition.transform.position.y), Quaternion.identity);
 			}
 		}
 
 		else if (this.pattern == 1)
 		{
-			Bullet.GetComponent<MoveBullet1>().SetAngle(nCharacterAngle);
+			Bullet.GetComponent<MoveBullet1>().SetAngle(GetEulerAngleZ());
 			Instantiate(Bullet, new Vector2(FirePosition.transform.position.x, FirePosition.transform.position.y), Quaternion.identity);
 		}
 	}

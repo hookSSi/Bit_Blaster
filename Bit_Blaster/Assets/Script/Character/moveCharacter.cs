@@ -75,11 +75,16 @@ public class moveCharacter : FlightObject_Script
 		canAttack = false;
 
 		// m_MissileTemp = Instantiate(m_Weapon, new Vector2(m_FirePoint.transform.position.x, m_FirePoint.transform.position.y), Quaternion.Euler(0, 0, -angle)) as GameObject;
-		this.GetComponent<ShootBullet>().Shoot(this.transform.eulerAngles.z);
+		this.GetComponent<ShootBullet>().Shoot();
 
 		yield return new WaitForSeconds(this.GetComponent<ShootBullet>().GetBulletDelay());
 
 		canAttack = true;
+	}
+
+	public float GetEulerAngleZ()
+	{
+		return this.transform.eulerAngles.z;
 	}
 
 }

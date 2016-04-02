@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveBullet1 : MonoBehaviour
+public class MoveBullet1 : ShootBullet
 {
-	public float angle;
+	public float bulletAngle;
 	private float speed;
 	private Transform playerTransform;
 
@@ -21,14 +21,14 @@ public class MoveBullet1 : MonoBehaviour
 		CheckPosition();
 	}
 
-	void Move()
+	protected override void Move()
 	{
-		this.transform.position += new Vector3(-Mathf.Sin(angle * Mathf.Deg2Rad) * speed, Mathf.Cos(angle * Mathf.Deg2Rad) * speed, 0);
+		this.transform.position += new Vector3(-Mathf.Sin(bulletAngle * Mathf.Deg2Rad) * speed, Mathf.Cos(bulletAngle * Mathf.Deg2Rad) * speed, 0);
 	}
 
 	public void SetAngle(float nAngle)
 	{
-		this.angle = nAngle;
+		this.bulletAngle = nAngle;
 	}
 
 	private void CheckPosition()
