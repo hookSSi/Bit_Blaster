@@ -3,10 +3,11 @@ using System.Collections;
 
 public class EnemyRed_script : Enemy_script {
 
-    private Transform m_target;
-    int x = Random.Range(-10, 10);
-    int y = Random.Range(-10, 10);
-    void Awake ()
+    protected Transform m_target;
+    protected int x = Random.Range(-10, 10);
+    protected int y = Random.Range(-10, 10);
+
+    void Start()
     {
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.down);
@@ -30,6 +31,5 @@ public class EnemyRed_script : Enemy_script {
             SetDirection(vec.normalized);
             m_Rigid.velocity = m_Direction * m_Velocity;
         }
-            
     }
 }

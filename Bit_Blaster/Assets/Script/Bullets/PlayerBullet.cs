@@ -71,6 +71,6 @@ public class PlayerBullet : FlightObject_Script
 
 	private void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.gameObject.tag == "Enemy") Destroy(gameObject);
+		if (col.gameObject.tag == "Player") Destroy(gameObject);
 	}
 }

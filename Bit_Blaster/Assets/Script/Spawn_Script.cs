@@ -55,7 +55,7 @@ public class Spawn_Script : MonoBehaviour {
             /* 난이도 조절 */
 
             if (m_Time > 5)
-                index = Random.Range(0, 2);
+                index = 3;//Random.Range(0, 2);
             if (m_Time > 20)
                 index = Random.Range(1, 2);
             if(m_Time > 35)
@@ -67,6 +67,7 @@ public class Spawn_Script : MonoBehaviour {
             {
                 m_SpawnRate1 = 0.1f;
                 m_MaxCount = 100;
+                index = Random.Range(0, m_Prefab.Length);
             }
 
         /* 나오는 지점을 4부분으로 나누어서 생성 */

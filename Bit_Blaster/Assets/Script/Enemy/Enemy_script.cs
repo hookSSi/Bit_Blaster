@@ -20,6 +20,7 @@ public class Enemy_script : FlightObject_Script {
     {
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.down);
+        m_Angle = 0;
         m_Velocity = 1f;
         m_HealthPoint = 3;
         m_FireRate = 1;
@@ -31,8 +32,6 @@ public class Enemy_script : FlightObject_Script {
     {
         if (m_IsAlive == false)
         {
-            DropItem();
-            Instantiate(m_DestroyedSound);
             Destroy(this.gameObject);
         }
         DestroyOutOfMap();
@@ -53,7 +52,14 @@ public class Enemy_script : FlightObject_Script {
             m_HealthPoint--;
 
             if (m_HealthPoint == 0)
-                m_IsAlive = false;   
+            {
+                if (this.gameObject.transform.parent != null)
+                    this.gameObject.transform.parent.GetComponent<ScoreUI>().AddScore(m_Score);
+                Instantiate(m_DestroyedSound);
+                DropItem();
+                m_IsAlive = false;
+            }
+                 
         }
 
         else if(p_other.tag == "Player") // 플레이어와 충돌 했을 때

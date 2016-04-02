@@ -38,9 +38,9 @@ public class BigRedBullet : FlightObject_Script
 		return this.bulletDelay;
 	}
 
-	private void OnTriggerEnter2D(Collider2D col)
+	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (col.gameObject.tag == "Enemy")
+		if (other.gameObject.tag == "Enemy")
 		{
 			for (int i = 0; i < 36; i++)
 			{

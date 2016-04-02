@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyGray_script : Enemy_script {
 
-	void Awake ()
+	void Start ()
     {
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.down);

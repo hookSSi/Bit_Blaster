@@ -27,6 +27,11 @@ public class ScoreUI : MonoBehaviour
 
         PauseGame();
     }
+   
+    void FixedUpdate()
+    {
+        m_PointTaxt.GetComponent<Text>().text = System.Convert.ToString(Score);
+    }
 
     void EarnScoreCheck()
     {
@@ -43,11 +48,14 @@ public class ScoreUI : MonoBehaviour
 
         Score += 10;
 
-        m_PointTaxt.GetComponent<Text>().text = System.Convert.ToString(Score);
-
         yield return new WaitForSeconds(m_ScoreEarningPeriod);
 
         m_TimeCheck = true;
+    }
+
+    public void AddScore(int p_Score)
+    {
+        Score += p_Score;
     }
 
     void PauseGame()
