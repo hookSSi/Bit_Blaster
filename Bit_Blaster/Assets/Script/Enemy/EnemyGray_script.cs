@@ -18,7 +18,7 @@ public class EnemyGray_script : Enemy_script {
     {
         for (int i = 0; i < 7; i++)
         {
-           // m_Bullet.GetComponent<MoveBullet1>().SetAngle((GetEulerAngleZ() - 30) + (i * 10));
+            //m_Bullet.GetComponent<MoveBullet1>().SetAngle((GetEulerAngleZ() - 30) + (i * 10));
             Instantiate(m_Bullet, m_FirePosition.position, Quaternion.identity);
         }
     }
