@@ -102,7 +102,7 @@ public class moveCharacter : FlightObject_Script
             Destroy(col.gameObject);
         }
 
-        else if (col.gameObject.tag == "Enemy")
+        else if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
         {
             Destroy(gameObject);
 
