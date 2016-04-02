@@ -16,10 +16,10 @@ public class EnemyBlue_script : EnemyRed_script {
 
     void Explode()
     {
-        for (int i = 1; i < 36; i++)
+        for (int i = 1; i <= 12; i++)
         {
             Instantiate(m_Bullet, transform.position, Quaternion.identity);
-            m_Bullet.GetComponent<Bullet_Script>().SetAngle(this.transform.eulerAngles.z + 10 * i);
+            m_Bullet.GetComponent<Bullet_Script>().SetAngle(this.transform.eulerAngles.z + 30 * i);
             //temp.SetAngle(temp.transform.eulerAngles.z + (i * 10));
         }
 

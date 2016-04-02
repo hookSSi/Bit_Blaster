@@ -25,6 +25,6 @@ public class GameOverScreen : MonoBehaviour
 
     void SroceShow()
     {
-        pointShow.GetComponent<Text>().text = "아차 점수는 " + point.GetComponent<ScoreStorage>().Score + "점";
+        //pointShow.GetComponent<Text>().text = "아차 점수는 " + point.GetComponent<ScoreStorage>().Score + "점";
     }
 }

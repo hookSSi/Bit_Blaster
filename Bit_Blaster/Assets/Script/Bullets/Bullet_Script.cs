@@ -9,7 +9,7 @@ public class Bullet_Script : FlightObject_Script {
     {
         m_Rigid = GetComponent<Rigidbody2D>(); // rigidbody
         SetDirection(Vector2.down); // 방향
-        m_Velocity = 1f; // 속도
+        m_Velocity = 0.1f; // 속도
         m_BulletDelay = 0.2f;
     }
 	
