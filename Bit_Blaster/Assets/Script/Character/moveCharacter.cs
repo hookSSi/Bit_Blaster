@@ -21,7 +21,9 @@ public class moveCharacter : FlightObject_Script
 
 	float angle;
 
-	private int itemIndex;
+    Vector2 m_TempMovement;
+
+    private int itemIndex;
 
 	Vector2 movement;
 
@@ -52,17 +54,19 @@ public class moveCharacter : FlightObject_Script
 
 		if (dirX == 0 && dirY == 0)
 		{
-
-		}
+            movement = m_TempMovement;
+        }
 
 		else
 		{
+            m_TempMovement = movement;
+
 			gameObject.transform.eulerAngles = new Vector3(0, 0, -angle);
 		}
 
-		GetComponent<Rigidbody2D>().velocity = movement * m_CharacterSpeed;
-
-	}
+        //GetComponent<Rigidbody2D>().velocity = movement * m_CharacterSpeed;
+        gameObject.transform.Translate(Vector2.up * (m_CharacterSpeed/50));
+    }
 
 	void AttackCheck()
 	{
