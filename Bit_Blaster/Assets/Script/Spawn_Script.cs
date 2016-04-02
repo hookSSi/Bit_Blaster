@@ -20,13 +20,12 @@ public class Spawn_Script : MonoBehaviour {
     {
         m_Count = 0;
         m_MaxCount = 30;
-        m_SpawnRate1 = 0.3f;
+        m_SpawnRate1 = 1f;
         m_SpawnRate2 = 5;
     }
 
     void Update()
     {
-        Debug.Log(m_Count);
         m_Count = transform.GetChildCount();
 
         if (m_Count == m_MaxCount)
@@ -54,6 +53,11 @@ public class Spawn_Script : MonoBehaviour {
                 index = Random.Range(0, 2);
             if (m_Time > 20)
                 index = Random.Range(1, 2);
+            if(m_Time > 35)
+            {
+                m_SpawnRate1 = 0.3f;
+                index = Random.Range(0, 3);
+            }
 
             /* 나오는 지점을 4부분으로 나누어서 생성 */
 
