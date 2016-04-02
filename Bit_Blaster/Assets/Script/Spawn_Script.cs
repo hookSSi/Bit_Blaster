@@ -8,6 +8,7 @@ public class Spawn_Script : MonoBehaviour {
     private int m_MaxCount; // 최대 생성 수
     private float m_SpawnRate1; // 스폰 주기 invoke 함수 실행 주기
     private int m_SpawnRate2; // 랜덤의 범위
+
     private Vector2 m_SpawnLocation; // 스폰 위치
     private int m_Direction; // 스폰 벽 위치
     private FlightObject_Script temp; // 생성용 객체
@@ -30,7 +31,7 @@ public class Spawn_Script : MonoBehaviour {
             Time.timeScale = 0;
  
 
-        m_Count = transform.GetChildCount();
+        m_Count = transform.childCount;
 
         if (m_Count == m_MaxCount || Time.timeScale == 0)
             CancelInvoke("SpawnManager");
@@ -49,7 +50,7 @@ public class Spawn_Script : MonoBehaviour {
 
         m_Direction = (Random.Range(1, m_SpawnRate2)); // 이걸로도 스폰 주기 조절 가능
 
-        if(m_Direction > 0 && m_Direction < 5)
+        if (m_Direction > 0 && m_Direction < 5)
         {
             /* 난이도 조절 */
 
@@ -68,20 +69,24 @@ public class Spawn_Script : MonoBehaviour {
                 m_MaxCount = 100;
             }
 
-            /* 나오는 지점을 4부분으로 나누어서 생성 */
-
+        /* 나오는 지점을 4부분으로 나누어서 생성 */
+      
             switch (m_Direction) 
             {
                 case 1: // 위
+                    Debug.Log("1");
                     Spawn(Vector2.down, new Vector2(Random.Range(-m_Map.X, m_Map.X), m_Map.Y), index);
                     break;
                 case 2: // 아래
+                    Debug.Log("2");
                     Spawn(Vector2.up, new Vector2(Random.Range(-m_Map.X, m_Map.X), -m_Map.Y), index);
                     break;
                 case 3: // 오른쪽
+                    Debug.Log("3");
                     Spawn(Vector2.left, new Vector2(m_Map.X, Random.Range(-m_Map.Y, m_Map.Y)), index);
                     break;
                 case 4: // 왼쪽
+                    Debug.Log("4");
                     Spawn(Vector2.right, new Vector2(-m_Map.X, Random.Range(-m_Map.Y, m_Map.Y)), index);
                     break;
             }
@@ -91,7 +96,7 @@ public class Spawn_Script : MonoBehaviour {
     void Spawn(Vector2 p_Objectdirection,Vector2 p_SpawnLocation,int p_index) // 오브젝트 생성 함수
     {     
         m_SpawnLocation = p_SpawnLocation;
-        temp = Instantiate(m_Prefab[p_index], m_SpawnLocation, Quaternion.identity) as FlightObject_Script;
+        temp = Instantiate(m_Prefab[p_index], p_SpawnLocation, Quaternion.identity) as FlightObject_Script;
         temp.SetDirection(p_Objectdirection);
 
         temp.transform.parent = this.transform;

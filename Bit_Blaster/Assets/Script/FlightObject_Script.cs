@@ -8,8 +8,6 @@ public class FlightObject_Script : MonoBehaviour {
     protected Vector2 m_Direction; // 방향
     protected float m_Velocity; // 최대 속도
 
-    bool Saw = false;
-
     void Awake()
     {
         m_Rigid = GetComponent<Rigidbody2D>(); // rigidbody
