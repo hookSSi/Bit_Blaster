@@ -4,8 +4,9 @@ using System.Collections;
 public class EnemyRed_script : Enemy_script {
 
     private Transform m_target;
-
-	void Awake ()
+    int x = Random.Range(-10, 10);
+    int y = Random.Range(-10, 10);
+    void Awake ()
     {
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.down);
@@ -19,10 +20,17 @@ public class EnemyRed_script : Enemy_script {
         if(GameObject.FindWithTag("Player") != null)
         {
             m_target = GameObject.FindGameObjectWithTag("Player").transform;
-
             Vector2 vec = m_target.position - transform.position;
             SetDirection(vec.normalized);
             m_Rigid.velocity = m_Direction * m_Velocity;
-        }  
+        }
+        else
+        {
+            
+            Vector2 vec = new Vector2(x, y);
+            SetDirection(vec.normalized);
+            m_Rigid.velocity = m_Direction * m_Velocity;
+        }
+            
     }
 }
