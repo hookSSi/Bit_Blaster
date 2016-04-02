@@ -16,10 +16,13 @@ public class EnemyRed_script : Enemy_script {
 
     protected override void Move()
     {
-        m_target = GameObject.FindGameObjectWithTag("Player").transform;
+        if(GameObject.FindWithTag("Player") != null)
+        {
+            m_target = GameObject.FindGameObjectWithTag("Player").transform;
 
-        Vector2 vec = m_target.position - transform.position;
-        SetDirection(vec.normalized);
-        m_Rigid.velocity = m_Direction * m_Velocity;
+            Vector2 vec = m_target.position - transform.position;
+            SetDirection(vec.normalized);
+            m_Rigid.velocity = m_Direction * m_Velocity;
+        }  
     }
 }

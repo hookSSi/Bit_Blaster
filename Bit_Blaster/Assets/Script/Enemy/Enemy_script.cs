@@ -33,7 +33,9 @@ public class Enemy_script : FlightObject_Script {
         {
             DropItem();
             Destroy(this.gameObject);
-        }     
+        }
+
+        OutObjectDestroySelf();
     }
 
 	void FixedUpdate ()
