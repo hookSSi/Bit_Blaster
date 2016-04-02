@@ -6,7 +6,10 @@ public class Enemy_script : FlightObject_Script {
     protected bool m_IsAlive = true;
     protected int m_HealthPoint; // 체력
     protected float m_FireRate; // 발사 주기
+    protected int m_Score; // 플레이어가 얻는 점수
+    protected int m_DropChance; // 드랍 확률 조절
 
+    public GameObject[] m_Item; // 드랍 아이템
     public GameObject m_Bullet; // 총알
     public Transform m_FirePosition; // 발사 위치
     public AudioClip m_FireSound; // 발사 소리
@@ -20,12 +23,15 @@ public class Enemy_script : FlightObject_Script {
         m_Velocity = 1f;
         m_HealthPoint = 3;
         m_FireRate = 1;
+        m_Score = 100;
+        m_DropChance = 10;
     }
 	
     void Update()
     {
         if (m_IsAlive == false)
         {
+            DropItem();
             Destroy(this.gameObject);
         }     
     }
@@ -59,6 +65,15 @@ public class Enemy_script : FlightObject_Script {
     protected virtual void FireBullet() // 공격 처리
     {
         Instantiate(m_Bullet, m_FirePosition.position, Quaternion.identity);
+    }
+
+    protected virtual void DropItem()
+    {
+        int value1 = Random.Range(0, m_DropChance + m_Item.Length);
+        int value2 = Random.Range(0, m_Item.Length);
+
+        if (value1 == value2 && m_Item.Length > 0)
+            Instantiate(m_Item[value2]);
     }
 
     /* Get,Set */
