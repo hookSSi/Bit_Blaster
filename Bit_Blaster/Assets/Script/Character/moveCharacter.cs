@@ -99,6 +99,7 @@ public class moveCharacter : FlightObject_Script
         if (col.gameObject.tag == "Item")
         {
             itemIndex = col.GetComponent<MoveItem>().GetItemNumber();
+            Debug.Log(itemIndex);
             Destroy(col.gameObject);
         }
 
