@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GreenEnemyBullet : FlightObject_Script
+public class GreenEnemyBullet : Bullet_Script
 {
 	public float bulletAngle;
 	public float bulletDelay;

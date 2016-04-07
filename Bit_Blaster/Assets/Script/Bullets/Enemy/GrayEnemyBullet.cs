@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GrayEnemyBullet : FlightObject_Script
+public class GrayEnemyBullet : Bullet_Script
 {
 
 	public float bulletAngle;

@@ -1,13 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Blink_Script : MonoBehaviour {
+public class BlueEnemyBullet : Bullet_Script {
 
-	void Start ()
-    {
-	
-	}
-	
 	void Update ()
     {
 	

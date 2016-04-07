@@ -63,6 +63,7 @@ public class FlightObject_Script : MonoBehaviour {
     public void SetAngle(float p_Angle)
     {
         m_Angle = p_Angle;
+        transform.eulerAngles = new Vector3(0, 0, m_Angle);
     }
 
     public float GetAngle()

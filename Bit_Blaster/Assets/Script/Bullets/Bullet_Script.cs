@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Bullet_Script : FlightObject_Script {
 
-    protected float m_BulletDelay;
+    protected float m_BulletDelay; // 총알 딜레이
 
     void Awake ()
     {

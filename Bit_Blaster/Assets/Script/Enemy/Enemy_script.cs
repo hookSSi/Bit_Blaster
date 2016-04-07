@@ -13,7 +13,7 @@ public class Enemy_script : FlightObject_Script {
     public GameObject m_Bullet; // 총알
     public Transform m_FirePosition; // 발사 위치
     public GameObject m_FireSound; // 발사 소리
-    public GameObject m_MovingSound; // 이동 소리
+   // public GameObject m_MovingSound; // 이동 소리
     public GameObject m_DestroyedSound; // 죽는 소리
 
     void Awake()
