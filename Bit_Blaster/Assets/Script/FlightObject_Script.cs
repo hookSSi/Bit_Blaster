@@ -6,7 +6,7 @@ public class FlightObject_Script : MonoBehaviour {
     /* 이동 관련 변수 */
     protected Rigidbody2D m_Rigid; // rigidbody
     protected Vector2 m_Direction; // 방향
-    public float m_Angle;
+    protected float m_Angle;
     protected float m_Velocity; // 속도
 
     void Awake()

@@ -32,6 +32,7 @@ public class Enemy_script : FlightObject_Script {
     {
         if (m_IsAlive == false)
         {
+            DropItem();
             Destroy(this.gameObject);
         }
         DestroyOutOfMap();
@@ -56,7 +57,6 @@ public class Enemy_script : FlightObject_Script {
                 if (this.gameObject.transform.parent != null)
                     this.gameObject.transform.parent.GetComponent<ScoreUI>().AddScore(m_Score);
                 Instantiate(m_DestroyedSound);
-                DropItem();
                 m_IsAlive = false;
             }
                  

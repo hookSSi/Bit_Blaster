@@ -4,12 +4,12 @@ using System.Collections;
 public class MoveItem : FlightObject_Script
 {
 	private Transform m_target;
-	private int itemNumber = Random.Range(0, 2);
+	private int itemNumber;
 
 	// Use this for initialization
 	void Start ()
 	{
-	
+        itemNumber = Random.Range(0, 2);
 	}
 	
 	// Update is called once per frame

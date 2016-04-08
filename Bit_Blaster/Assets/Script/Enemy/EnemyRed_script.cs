@@ -4,11 +4,14 @@ using System.Collections;
 public class EnemyRed_script : Enemy_script {
 
     protected Transform m_target;
-    protected int x = Random.Range(-10, 10);
-    protected int y = Random.Range(-10, 10);
+    protected int x; // 플레이어 없을 때 향해야할 x
+    protected int y; // 플레이어 없을 때 향해야할 y
 
     void Start()
     {
+        x = Random.Range(-10, 10);
+        y = Random.Range(-10, 10);
+
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.down);
         m_Velocity = 2f;

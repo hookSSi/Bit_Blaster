@@ -7,6 +7,9 @@ public class EnemyBlue_script : EnemyRed_script {
 
     void Start()
     {
+        x = Random.Range(-10, 10);
+        y = Random.Range(-10, 10);
+
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.down);
         m_Velocity = 2f;
