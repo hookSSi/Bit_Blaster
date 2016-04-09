@@ -22,7 +22,7 @@ public class CharacterController_Script : FlightObject_Script {
 	void Start () 
     {
         Bullet = m_Bullet.GetComponent<Bullet_Script>();
-        m_Velocity = 3.5f;
+        m_Velocity = 5f;
         InvokeRepeating("FireBullet", 0.1f, m_FireRate);
         m_Rigid.velocity = m_Direction * m_Velocity;
 	}
@@ -70,7 +70,7 @@ public class CharacterController_Script : FlightObject_Script {
     {
         if (col.gameObject.tag == "Item")
         {
-            m_Bullet = col.GetComponent<MoveItem>().m_ItemArray[col.GetComponent<MoveItem>().GetItemIndex()];
+            SetBullet(col.GetComponent<Item_Script>().m_ItemArray[col.GetComponent<Item_Script>().GetItemIndex()]);
             m_FireRate = m_Bullet.GetComponent<Bullet_Script>().GetFireRate();
             Destroy(col.gameObject);
         }

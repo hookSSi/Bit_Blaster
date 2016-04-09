@@ -11,7 +11,7 @@ public class Spawn_Script : MonoBehaviour {
 
     private Vector2 m_SpawnLocation; // 스폰 위치
     private int m_Direction; // 스폰 벽 위치
-    private FlightObject_Script temp; // 생성용 객체
+    private FlightObject_Script Object; // 생성용 객체
     private float m_Time; // 게임 시간 경과
 
     public FlightObject_Script[] m_Prefab; // 적 종류 배열
@@ -106,12 +106,15 @@ public class Spawn_Script : MonoBehaviour {
     }
 
     void Spawn(Vector2 p_Objectdirection,Vector2 p_SpawnLocation,int p_index) // 오브젝트 생성 함수
-    {     
-        m_SpawnLocation = p_SpawnLocation;
-        temp = Instantiate(m_Prefab[p_index], p_SpawnLocation, Quaternion.identity) as FlightObject_Script;
-        temp.SetDirection(p_Objectdirection);
+    {
+        FlightObject_Script ForSpawn;
 
-        temp.transform.parent = this.transform;
+        Object = m_Prefab[p_index].GetComponent<FlightObject_Script>();
+        m_SpawnLocation = p_SpawnLocation;
+        ForSpawn = Instantiate(Object, p_SpawnLocation, Quaternion.identity) as FlightObject_Script;
+        ForSpawn.SetDirection(p_Objectdirection);
+
+        ForSpawn.transform.parent = this.transform;
         m_Count++;
     }
 

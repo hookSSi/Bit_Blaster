@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveItem : FlightObject_Script
+public class Item_Script : FlightObject_Script
 {
     public GameObject[] m_ItemArray;
 
     private int m_RangeMin = 0;
-    private int m_RangeMax = 2;
+    private int m_RangeMax;
     private int m_ItemIndex;
 	private Transform m_target;
 
@@ -14,6 +14,7 @@ public class MoveItem : FlightObject_Script
 	// Use this for initialization
 	void Start ()
 	{
+        m_RangeMax = m_ItemArray.Length;
         m_ItemIndex = Random.Range(m_RangeMin, m_RangeMax);
 	}
 	

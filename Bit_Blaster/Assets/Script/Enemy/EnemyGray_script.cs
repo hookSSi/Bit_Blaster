@@ -24,7 +24,8 @@ public class EnemyGray_script : Enemy_script
         if(tmpPlayer != null)
         {
             ForSpawn = Instantiate(Bullet, m_FirePosition.position, transform.rotation) as Bullet_Script;
-            ForSpawn.SetDirection(tmpPlayer.transform.position.normalized);
+            Vector2 vec = tmpPlayer.transform.position - transform.position;
+            ForSpawn.SetDirection(vec.normalized);
         }		
 	}
 }
