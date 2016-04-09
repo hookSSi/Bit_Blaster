@@ -90,19 +90,15 @@ public class Spawn_Script : MonoBehaviour {
             switch (m_Direction) 
             {
                 case 1: // 위
-                    Debug.Log("1");
                     Spawn(Vector2.down, new Vector2(Random.Range(-m_Map.X, m_Map.X), m_Map.Y), index);
                     break;
                 case 2: // 아래
-                    Debug.Log("2");
                     Spawn(Vector2.up, new Vector2(Random.Range(-m_Map.X, m_Map.X), -m_Map.Y), index);
                     break;
                 case 3: // 오른쪽
-                    Debug.Log("3");
                     Spawn(Vector2.left, new Vector2(m_Map.X, Random.Range(-m_Map.Y, m_Map.Y)), index);
                     break;
                 case 4: // 왼쪽
-                    Debug.Log("4");
                     Spawn(Vector2.right, new Vector2(-m_Map.X, Random.Range(-m_Map.Y, m_Map.Y)), index);
                     break;
             }

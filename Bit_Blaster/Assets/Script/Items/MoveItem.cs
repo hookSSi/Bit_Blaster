@@ -3,13 +3,18 @@ using System.Collections;
 
 public class MoveItem : FlightObject_Script
 {
+    public GameObject[] m_ItemArray;
+
+    private int m_RangeMin = 0;
+    private int m_RangeMax = 2;
+    private int m_ItemIndex;
 	private Transform m_target;
-	private int itemNumber;
+
 
 	// Use this for initialization
 	void Start ()
 	{
-        itemNumber = Random.Range(0, 2);
+        m_ItemIndex = Random.Range(m_RangeMin, m_RangeMax);
 	}
 	
 	// Update is called once per frame
@@ -29,8 +34,8 @@ public class MoveItem : FlightObject_Script
 		}
 	}
 
-	public int GetItemNumber()
+	public int GetItemIndex()
 	{
-		return itemNumber;
+        return m_ItemIndex;
 	}
 }

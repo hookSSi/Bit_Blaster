@@ -1,0 +1,16 @@
+diff a/Bit_Blaster/Assets/Script/Enemy/EnemyBlue_script.cs b/Bit_Blaster/Assets/Script/Enemy/EnemyBlue_script.cs	(rejected hunks)
+@@ -26,11 +26,10 @@
+ 
+     void Explode()
+     {
+-        for (int i = 1; i <= 12; i++)
++        for (int i = 0; i <= 12; i++)
+         {
+-            Instantiate(m_Bullet, transform.position, Quaternion.identity);
+-            m_Bullet.GetComponent<Bullet_Script>().SetAngle(this.transform.eulerAngles.z + 30 * i);
+-            //temp.SetAngle(temp.transform.eulerAngles.z + (i * 10));
++           Instantiate(bullet, transform.position, Quaternion.identity);
++            bullet.SetAngle(this.transform.eulerAngles.z + 30 * i);
+         }
+ 
+         Destroy(this.gameObject);
