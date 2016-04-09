@@ -11,9 +11,9 @@ public class FlightObject_Script : MonoBehaviour {
 
     void Awake()
     {
-        m_Rigid = GetComponent<Rigidbody2D>(); // rigidbody
-        //SetDirection(Vector2.up); // 방향
-        m_Velocity = 1f; // 속도
+        m_Rigid = GetComponent<Rigidbody2D>();
+        SetDirection(Vector2.up);
+        m_Velocity = 1f;
         m_Angle = 0;
     }
 
@@ -40,20 +40,19 @@ public class FlightObject_Script : MonoBehaviour {
 
     public float GetMaxVelocity()
     {
-        return this.m_Velocity;
+        return m_Velocity;
     }
 
 
     public Vector2 GetDirection()
     {
-        return this.m_Direction;
+        return m_Direction;
     }
 
     public void SetDirection(Vector2 p_Direction)
     {
-        this.m_Direction = p_Direction;
+        m_Direction = p_Direction;
         transform.eulerAngles = new Vector3(0,0,-1 * Mathf.Atan2(p_Direction.x, p_Direction.y) * Mathf.Rad2Deg);
-        m_Angle = -1 * Mathf.Atan2(p_Direction.x, p_Direction.y) * Mathf.Rad2Deg;
     }
 
     public void SetMaxVelocity(float p_MaxVelocity)
@@ -65,6 +64,7 @@ public class FlightObject_Script : MonoBehaviour {
     {
         this.m_Angle = p_Angle;
         transform.eulerAngles = new Vector3(0, 0, m_Angle);
+        m_Direction = new Vector2(-Mathf.Sin(m_Angle * Mathf.Deg2Rad), Mathf.Cos(m_Angle * Mathf.Deg2Rad));
     }
 
     public float GetAngle()

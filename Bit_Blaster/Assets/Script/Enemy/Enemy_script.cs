@@ -8,6 +8,7 @@ public class Enemy_script : FlightObject_Script {
     protected float m_FireRate; // 발사 주기
     protected int m_Score; // 플레이어가 얻는 점수
     protected int m_DropChance; // 드랍 확률 조절
+    protected Bullet_Script Bullet; // 총알 생성용
 
     public GameObject[] m_Item; // 드랍 아이템
     public GameObject m_Bullet; // 총알
@@ -15,9 +16,11 @@ public class Enemy_script : FlightObject_Script {
     public GameObject m_FireSound; // 발사 소리
    // public GameObject m_MovingSound; // 이동 소리
     public GameObject m_DestroyedSound; // 죽는 소리
+    
 
     void Awake()
     {
+        Bullet = m_Bullet.GetComponent<Bullet_Script>();
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.down);
         m_Angle = 0;

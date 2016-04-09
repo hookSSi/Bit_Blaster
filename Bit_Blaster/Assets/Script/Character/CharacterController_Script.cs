@@ -12,16 +12,19 @@ public class CharacterController_Script : FlightObject_Script {
     public GameObject m_MovingSound; // 이동 소리
     public GameObject m_DestroyedSound; // 죽는 소리
 
+    private Bullet_Script Bullet; // 총알 스폰용
     private bool m_IsAlive = true;  // 살아있니?
-    float dirX = 0;
+    float dirX = 1;
     float dirY = 1;
     
     
 
 	void Start () 
     {
+        Bullet = m_Bullet.GetComponent<Bullet_Script>();
         m_Velocity = 3.5f;
-        InvokeRepeating("FireBullet", 0.1f,m_FireRate);
+        InvokeRepeating("FireBullet", 0.1f, m_FireRate);
+        m_Rigid.velocity = m_Direction * m_Velocity;
 	}
 	
     void Update()
@@ -48,15 +51,17 @@ public class CharacterController_Script : FlightObject_Script {
 
     protected virtual void FireBullet() // 공격 처리
     {
-        m_Bullet.GetComponent<Bullet_Script>().SetAngle(this.m_Angle);
-        Instantiate(m_Bullet, m_FirePosition.position, Quaternion.Euler(new Vector3(0, 0, this.transform.eulerAngles.z)));
+        Bullet_Script ForSpawn;
+
+        ForSpawn = Instantiate(Bullet, m_FirePosition.position, transform.rotation) as Bullet_Script;
+        ForSpawn.SetDirection(m_Direction);
     }
 
     protected override void Move() // 이동 처리
     {
         if (!(Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0))
         {
-            SetDirection(new Vector2(dirX, dirY));
+            SetDirection(new Vector2(dirX, dirY).normalized);
             m_Rigid.velocity = m_Direction * m_Velocity;
         }
     }
@@ -87,5 +92,6 @@ public class CharacterController_Script : FlightObject_Script {
     public void SetBullet(GameObject p_Bullet)
     {
         m_Bullet = p_Bullet;
+        Bullet = m_Bullet.GetComponent<Bullet_Script>();
     }
 }

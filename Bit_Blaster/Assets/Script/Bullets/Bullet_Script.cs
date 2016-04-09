@@ -5,23 +5,20 @@ public class Bullet_Script : FlightObject_Script {
 
     protected float m_FireRate; // 총알 딜레이
 
-    void Start()
+    void Awake()
     {
-        m_Velocity = 10f; // 속도
+        m_Rigid = GetComponent<Rigidbody2D>();
+        SetDirection(Vector2.up);
+        m_Velocity = 30f;
+        m_Angle = 0;
         m_FireRate = 0.2f;
     }
 	
-	// Update is called once per frame
 	void FixedUpdate()
     {
         Move();
         DestroyOutOfMap();
     }
-
-    /*protected override void Move()
-    {
-        transform.position += new Vector3(-Mathf.Sin(m_Angle * Mathf.Deg2Rad) * m_Velocity, Mathf.Cos(m_Angle * Mathf.Deg2Rad) * m_Velocity, 0);
-    }*/
 
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {

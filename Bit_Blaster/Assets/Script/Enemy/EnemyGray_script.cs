@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyGray_script : Enemy_script
 {
 
-	void Awake()
+	void Start()
 	{
 		m_Rigid = GetComponent<Rigidbody2D>();
 		SetDirection(Vector2.down);
@@ -18,11 +18,13 @@ public class EnemyGray_script : Enemy_script
 
 	protected override void FireBullet() // 공격 처리
 	{
+        Bullet_Script ForSpawn;
 		GameObject tmpPlayer = GameObject.FindWithTag("Player");
-		float tmpAngle;
 
-		tmpAngle = Mathf.Atan2(this.transform.position.x - tmpPlayer.transform.position.x, this.transform.position.y - tmpPlayer.transform.position.y);
-		m_Bullet.GetComponent<GrayEnemyBullet>().SetEulerAngleZ(tmpAngle);
-		Instantiate(m_Bullet, m_FirePosition.position, Quaternion.Euler(new Vector3(0, 0, this.transform.eulerAngles.z)));
+        if(tmpPlayer != null)
+        {
+            ForSpawn = Instantiate(Bullet, m_FirePosition.position, transform.rotation) as Bullet_Script;
+            ForSpawn.SetDirection(tmpPlayer.transform.position.normalized);
+        }		
 	}
 }

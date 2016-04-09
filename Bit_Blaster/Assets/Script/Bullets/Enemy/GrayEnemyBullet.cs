@@ -12,6 +12,7 @@ public class GrayEnemyBullet : Bullet_Script
 	// Use this for initialization	
 	void Start()
 	{
+        m_Velocity = 5f;
 		speed = 0.2f;
 		bulletDelay = 5f;
 	}
@@ -21,11 +22,6 @@ public class GrayEnemyBullet : Bullet_Script
 	{
 		Move();
 		DestroyOutOfMap();
-	}
-
-	protected override void Move()
-	{
-		this.transform.position += new Vector3(-Mathf.Sin(bulletAngle) * speed, -Mathf.Cos(bulletAngle) * speed, 0);
 	}
 
 	public void SetEulerAngleZ(float nAngle)
