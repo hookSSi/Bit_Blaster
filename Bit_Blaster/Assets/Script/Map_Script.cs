@@ -11,6 +11,7 @@ public class Map_Script: MonoBehaviour {
 
     void Awake()
     {
+        UnityEngine.Cursor.visible = false;
         m_MainCamera.orthographicSize = Y;
         m_WallArray[0].transform.position = new Vector2(0, Y-0.5f);
         m_WallArray[0].transform.localScale = new Vector3(X / 6, 1, 1);

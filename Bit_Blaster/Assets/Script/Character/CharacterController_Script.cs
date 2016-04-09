@@ -78,6 +78,7 @@ public class CharacterController_Script : FlightObject_Script {
         else if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
         {
             Instantiate(m_DestroyedSound);
+            UnityEngine.Cursor.visible = true;
             m_IsAlive = false;
         }    
     }
