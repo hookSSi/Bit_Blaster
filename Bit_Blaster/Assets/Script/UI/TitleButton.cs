@@ -12,7 +12,7 @@ public class TitleButton : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("360_P1_StartButton"))
+        if (Input.GetButtonDown("360_P1_StartButton") || Input.GetButtonDown("Submit"))
         {
             SceneManager.LoadScene("1");
         }
