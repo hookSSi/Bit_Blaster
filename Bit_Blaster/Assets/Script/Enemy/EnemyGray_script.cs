@@ -7,7 +7,6 @@ public class EnemyGray_script : Enemy_script
 	void Start()
 	{
 		m_Rigid = GetComponent<Rigidbody2D>();
-		SetDirection(Vector2.down);
 		m_Velocity = 1f;
 		m_HealthPoint = 10;
 		m_FireRate = 2.5f;

@@ -7,7 +7,8 @@ public class CharacterController_Script : FlightObject_Script {
     
     public GameObject m_Bullet; // 총알
     public float m_FireRate = 0.2f; // 공격 딜레이
-    public Transform m_FirePosition; // 발사 위치
+    public Transform m_RightFirePosition; // 오른쪽 발사 위치
+    public Transform m_LeftFirePosition; // 왼쪽 발사 위치
     public GameObject m_FireSound; // 발사 소리
     public GameObject m_MovingSound; // 이동 소리
     public GameObject m_DestroyedSound; // 죽는 소리
@@ -16,6 +17,7 @@ public class CharacterController_Script : FlightObject_Script {
     private bool m_IsAlive = true;  // 살아있니?
     float dirX = 1;
     float dirY = 1;
+    bool side = true;
     
     
 
@@ -29,10 +31,10 @@ public class CharacterController_Script : FlightObject_Script {
 	
     void Update()
     {
-        if (!(Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0))
+        if (!(Input.GetAxis("360_P1_Horizontal") == 0 && Input.GetAxis("360_P1_Vertical") == 0 && Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0))
         {
-            dirX = Input.GetAxisRaw("Horizontal");
-            dirY = Input.GetAxisRaw("Vertical");
+            dirX = Input.GetAxis("360_P1_Horizontal") + Input.GetAxis("Horizontal");
+            dirY = Input.GetAxis("360_P1_Vertical") + Input.GetAxis("Vertical");
         }
     }
 
@@ -40,8 +42,7 @@ public class CharacterController_Script : FlightObject_Script {
     {
 	    if(!m_IsAlive)
         {
-            Destroy(gameObject);
-            Application.LoadLevel("GameOver");
+            GameManager.GameOver();
         }
         else
         {
@@ -49,36 +50,45 @@ public class CharacterController_Script : FlightObject_Script {
         }
 	}
 
-    protected virtual void FireBullet() // 공격 처리
+    /* 플레이어 컨트롤 관련 함수 */
+
+    protected void FireBullet() // 공격 처리
     {
         Bullet_Script ForSpawn;
 
-        ForSpawn = Instantiate(Bullet, m_FirePosition.position, transform.rotation) as Bullet_Script;
+        if(side)
+            ForSpawn = Instantiate(Bullet, m_RightFirePosition.position, transform.rotation) as Bullet_Script;
+        else
+            ForSpawn = Instantiate(Bullet, m_LeftFirePosition.position, transform.rotation) as Bullet_Script;
+        side = !side;
         ForSpawn.SetDirection(m_Direction);
     }
 
     protected override void Move() // 이동 처리
     {
-        if (!(Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0))
+        if (!(Input.GetAxis("360_P1_Horizontal") == 0 && Input.GetAxis("360_P1_Vertical") == 0 && Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0))
         {
             SetDirection(new Vector2(dirX, dirY).normalized);
             m_Rigid.velocity = m_Direction * m_Velocity;
         }
     }
 
+    protected void Dash() // 대쉬
+    {
+
+    }
+
     private void OnTriggerEnter2D(Collider2D col) // 충돌 처리
     {
-        if (col.gameObject.tag == "Item")
+        if (col.gameObject.tag == "Item") // 아이템 적용 처리
         {
-            SetBullet(col.GetComponent<Item_Script>().m_ItemArray[col.GetComponent<Item_Script>().GetItemIndex()]);
-            m_FireRate = m_Bullet.GetComponent<Bullet_Script>().GetFireRate();
+            SetBullet(col.GetComponent<Item_Script>().m_ItemArray[col.GetComponent<Item_Script>().GetItemIndex()]);           
             Destroy(col.gameObject);
         }
 
         else if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
         {
             Instantiate(m_DestroyedSound);
-            UnityEngine.Cursor.visible = true;
             m_IsAlive = false;
         }    
     }
@@ -94,5 +104,8 @@ public class CharacterController_Script : FlightObject_Script {
     {
         m_Bullet = p_Bullet;
         Bullet = m_Bullet.GetComponent<Bullet_Script>();
+        m_FireRate = Bullet.GetFireRate();
+        CancelInvoke();
+        InvokeRepeating("FireBullet", 0.1f, m_FireRate);
     }
 }

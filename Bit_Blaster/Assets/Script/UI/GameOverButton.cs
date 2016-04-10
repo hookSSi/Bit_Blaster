@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameOverButton : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("360_P1_StartButton"))
         {
-            Application.LoadLevel("title");
+            SceneManager.LoadScene("title");
         }
 
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("360_P1_BButton"))
         {
             Application.Quit();
         }
@@ -18,7 +19,7 @@ public class GameOverButton : MonoBehaviour
 
     public void loadTitle()
     {
-        Application.LoadLevel("title");
+        SceneManager.LoadScene("title");
     }
 
     public void exit()

@@ -7,9 +7,9 @@ public class LifeTime_Script : MonoBehaviour {
 
 	void FixedUpdate ()
     {
-        m_Time = m_Time - Time.deltaTime;
+        m_Time -= Time.deltaTime;
 
-	    if(m_Time == 0)
+	    if(m_Time < 0)
         {
             Destroy(this.gameObject);
         }

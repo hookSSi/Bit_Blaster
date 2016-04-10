@@ -26,9 +26,9 @@ public class PowerEffect : MonoBehaviour {
 
     void GenerateRandomColor()
     {
-        m_Color.r = Random.RandomRange(0.5f, 1f);
-        m_Color.g = Random.RandomRange(0f, 1f);
-        m_Color.b = Random.RandomRange(0f, 1f);
-        m_Color.a = Random.RandomRange(0.8f, 1f);
+        m_Color.r = Random.Range(0.5f, 1f);
+        m_Color.g = Random.Range(0f, 1f);
+        m_Color.b = Random.Range(0f, 1f);
+        m_Color.a = Random.Range(0.8f, 1f);
     }
 }

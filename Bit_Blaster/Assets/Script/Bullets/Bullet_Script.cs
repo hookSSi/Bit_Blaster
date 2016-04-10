@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Bullet_Script : FlightObject_Script {
 
-    protected float m_FireRate; // 총알 딜레이
+    public float m_FireRate; // 총알 딜레이
 
     void Awake()
     {
@@ -11,7 +11,6 @@ public class Bullet_Script : FlightObject_Script {
         SetDirection(Vector2.up);
         m_Velocity = 30f;
         m_Angle = 0;
-        m_FireRate = 0.2f;
     }
 	
 	void FixedUpdate()
@@ -28,6 +27,6 @@ public class Bullet_Script : FlightObject_Script {
     /* Get,Set의 구역 */
     public float GetFireRate()
     {
-        return this.m_FireRate;
+        return m_FireRate;
     }
 }

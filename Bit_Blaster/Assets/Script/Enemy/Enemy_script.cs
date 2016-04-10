@@ -22,13 +22,13 @@ public class Enemy_script : FlightObject_Script {
     {
         Bullet = m_Bullet.GetComponent<Bullet_Script>();
         m_Rigid = GetComponent<Rigidbody2D>();
-        SetDirection(Vector2.down);
+        SetDirection(Vector2.zero);
         m_Angle = 0;
         m_Velocity = 1f;
         m_HealthPoint = 3;
         m_FireRate = 1;
         m_Score = 100;
-        m_DropChance = 10;
+        m_DropChance = 1;
     }
 	
     void Update()
@@ -57,8 +57,7 @@ public class Enemy_script : FlightObject_Script {
 
             if (m_HealthPoint == 0)
             {
-                if (this.gameObject.transform.parent != null)
-                    this.gameObject.transform.parent.GetComponent<ScoreUI>().AddScore(m_Score);
+                GameManager.AddScore(m_Score);
                 Instantiate(m_DestroyedSound);
                 m_IsAlive = false;
             }
@@ -95,5 +94,10 @@ public class Enemy_script : FlightObject_Script {
     public void SetFireRate(float p_FireRate)
     {
         m_FireRate = p_FireRate;
+    }
+
+    public int GetHealthPoint()
+    {
+        return m_HealthPoint;
     }
 }

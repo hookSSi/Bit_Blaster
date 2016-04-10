@@ -13,7 +13,6 @@ public class EnemyRed_script : Enemy_script {
         y = Random.Range(-10, 10);
 
         m_Rigid = GetComponent<Rigidbody2D>();
-        SetDirection(Vector2.down);
         m_Velocity = 2f;
         m_HealthPoint = 1;
         m_Score = 100;

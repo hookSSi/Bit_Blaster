@@ -8,6 +8,7 @@ public class FlightObject_Script : MonoBehaviour {
     protected float m_Velocity; // 속도
     protected Vector2 m_Direction; // 방향
     public float m_Angle; //각도
+    
 
     void Awake()
     {
@@ -64,7 +65,7 @@ public class FlightObject_Script : MonoBehaviour {
     {
         this.m_Angle = p_Angle;
         transform.eulerAngles = new Vector3(0, 0, m_Angle);
-        m_Direction = new Vector2(-Mathf.Sin(m_Angle * Mathf.Deg2Rad), Mathf.Cos(m_Angle * Mathf.Deg2Rad));
+        m_Direction = new Vector3(-Mathf.Sin(p_Angle * Mathf.Deg2Rad), Mathf.Cos(p_Angle * Mathf.Deg2Rad));
     }
 
     public float GetAngle()

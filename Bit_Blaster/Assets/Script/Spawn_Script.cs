@@ -10,15 +10,17 @@ public class Spawn_Script : MonoBehaviour {
     private int m_SpawnRate2; // 랜덤의 범위
 
     private Vector2 m_SpawnLocation; // 스폰 위치
+    private float m_MinLocation; // 최소 스폰 위치
     private int m_Direction; // 스폰 벽 위치
     private FlightObject_Script Object; // 생성용 객체
     private float m_Time; // 게임 시간 경과
 
     public FlightObject_Script[] m_Prefab; // 적 종류 배열
-    public Map_Script m_Map; // 기준 맵
+    public GameManager m_Map; // 기준 맵
 
     void Awake()
     {
+        m_MinLocation = 1;
         m_Count = 0;
         m_MaxCount = 30;
         m_SpawnRate1 = 1f;
@@ -44,11 +46,13 @@ public class Spawn_Script : MonoBehaviour {
         m_Time += Time.deltaTime;
     }
 
-    void SpawnManager() // 스폰
+    /* 스폰 관련 함수들 */
+
+    void SpawnManager()
     {
         int index = 0; 
 
-        m_Direction = (Random.Range(1, m_SpawnRate2)); // 이걸로도 스폰 주기 조절 가능
+        m_Direction = (Random.Range(0, m_SpawnRate2)); // 이걸로도 스폰 주기 조절 가능
 
         if (m_Direction > 0 && m_Direction < 5)
         {
@@ -85,34 +89,51 @@ public class Spawn_Script : MonoBehaviour {
                 index = Random.Range(0, m_Prefab.Length);
             }
 
-            /* 나오는 지점을 4부분으로 나누어서 생성 */
+            Object = m_Prefab[index].GetComponent<FlightObject_Script>();
 
+            /* 나오는 지점을 4부분으로 나누어서 생성 */
             switch (m_Direction) 
-            {
+            {              
                 case 1: // 위
-                    Spawn(Vector2.down, new Vector2(Random.Range(-m_Map.X, m_Map.X), m_Map.Y), index);
+                    SpawnSpawnStraight(Vector2.down, new Vector2(Random.Range(-m_Map.X+ m_MinLocation, m_Map.X- m_MinLocation), m_Map.Y), index);
                     break;
                 case 2: // 아래
-                    Spawn(Vector2.up, new Vector2(Random.Range(-m_Map.X, m_Map.X), -m_Map.Y), index);
+                    SpawnSpawnStraight(Vector2.up, new Vector2(Random.Range(-m_Map.X+ m_MinLocation, m_Map.X- m_MinLocation), -m_Map.Y), index);
                     break;
                 case 3: // 오른쪽
-                    Spawn(Vector2.left, new Vector2(m_Map.X, Random.Range(-m_Map.Y, m_Map.Y)), index);
+                    SpawnSpawnStraight(Vector2.left, new Vector2(m_Map.X, Random.Range(-m_Map.Y+ m_MinLocation, m_Map.Y- m_MinLocation)), index);
                     break;
                 case 4: // 왼쪽
-                    Spawn(Vector2.right, new Vector2(-m_Map.X, Random.Range(-m_Map.Y, m_Map.Y)), index);
+                    SpawnSpawnStraight(Vector2.right, new Vector2(-m_Map.X, Random.Range(-m_Map.Y+ m_MinLocation, m_Map.Y- m_MinLocation)), index);
                     break;
             }
+
+            if (GameObject.FindWithTag("Player") != null && m_Time > 80)
+                SpawnToPlayer(new Vector2(Random.Range(-m_Map.X + m_MinLocation, m_Map.X - m_MinLocation), Random.Range(-m_Map.Y + m_MinLocation, m_Map.Y - m_MinLocation)), index);
         }
     }
 
-    void Spawn(Vector2 p_Objectdirection,Vector2 p_SpawnLocation,int p_index) // 오브젝트 생성 함수
+    void SpawnSpawnStraight(Vector2 p_Objectdirection,Vector2 p_SpawnLocation,int p_index) // 오브젝트 생성 함수
     {
         FlightObject_Script ForSpawn;
 
-        Object = m_Prefab[p_index].GetComponent<FlightObject_Script>();
         m_SpawnLocation = p_SpawnLocation;
         ForSpawn = Instantiate(Object, p_SpawnLocation, Quaternion.identity) as FlightObject_Script;
         ForSpawn.SetDirection(p_Objectdirection);
+
+        ForSpawn.transform.parent = this.transform;
+        m_Count++;
+    }
+    void SpawnToPlayer(Vector2 p_SpawnLocation, int p_index)
+    {
+        FlightObject_Script ForSpawn;
+        Vector2 vec;
+
+        m_SpawnLocation = p_SpawnLocation;
+        ForSpawn = Instantiate(Object, p_SpawnLocation, Quaternion.identity) as FlightObject_Script;
+
+        vec = (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position - p_SpawnLocation; // 플레이어를 향한 벡터
+        ForSpawn.SetDirection(vec.normalized);
 
         ForSpawn.transform.parent = this.transform;
         m_Count++;
