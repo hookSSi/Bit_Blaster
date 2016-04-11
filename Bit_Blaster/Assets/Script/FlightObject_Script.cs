@@ -7,11 +7,15 @@ public class FlightObject_Script : MonoBehaviour {
     protected Rigidbody2D m_Rigid; // rigidbody
     protected float m_Velocity; // 속도
     protected Vector2 m_Direction; // 방향
-    public float m_Angle; //각도
-    
+    protected float m_Angle; //각도
+    protected SpriteRenderer m_SpriteRenderer; // 스프라이트 렌더러
+
+    public Material m_BasicMaterial; // 기본 메터리얼
+    public Material m_HitMaterial; // 피격 효과 메터리얼
 
     void Awake()
     {
+        m_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         m_Rigid = GetComponent<Rigidbody2D>();
         SetDirection(Vector2.up);
         m_Velocity = 1f;
