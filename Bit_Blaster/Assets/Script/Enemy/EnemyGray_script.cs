@@ -3,6 +3,9 @@ using System.Collections;
 
 public class EnemyGray_script : Enemy_script
 {
+    protected Transform m_target;
+    
+    float gap;
 
 	void Start()
 	{
@@ -13,6 +16,7 @@ public class EnemyGray_script : Enemy_script
 		m_Score = 500;
 		m_DropChance = 10;
 		InvokeRepeating("FireBullet", 1f, m_FireRate);
+        gap = Mathf.Cos(Mathf.Deg2Rad*Random.Range(0, 80));
 	}
 
 	protected override void FireBullet() // 공격 처리
@@ -27,4 +31,19 @@ public class EnemyGray_script : Enemy_script
             ForSpawn.SetDirection(vec.normalized);
         }		
 	}
+
+    protected override void Move()
+    {
+        if (GameObject.FindWithTag("Player") != null)
+        {
+            Vector2 vec;
+
+            m_target = GameObject.FindGameObjectWithTag("Player").transform;
+            vec = m_target.position * gap - transform.position;
+            SetDirection(vec.normalized);
+            m_Rigid.velocity = m_Direction * m_Velocity;
+        }
+        else
+            base.Move();
+    }
 }

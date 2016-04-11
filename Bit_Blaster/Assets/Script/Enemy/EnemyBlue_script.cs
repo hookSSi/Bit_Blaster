@@ -3,7 +3,6 @@ using System.Collections;
 
 public class EnemyBlue_script : EnemyRed_script {
 
-
     void Start()
     {
         x = Random.Range(-10, 10);
@@ -28,11 +27,12 @@ public class EnemyBlue_script : EnemyRed_script {
     protected virtual void Explode()
     {
         Bullet_Script ForSpawn;
+        int gap = Random.Range(20,60);
 
         for (int i = 0; i <= 12; i++)
         {
            ForSpawn = Instantiate(Bullet, transform.position, Quaternion.identity) as Bullet_Script;
-           ForSpawn.SetAngle(30 * i);
+           ForSpawn.SetAngle(30 * i + gap);
         }
     }
 }

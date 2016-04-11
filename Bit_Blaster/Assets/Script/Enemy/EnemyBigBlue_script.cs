@@ -27,7 +27,7 @@ public class EnemyBigBlue_script : EnemyBlue_script {
         for (int i = 0; i <= 6; i++)
         {
             ForSpawn1 = Instantiate(Bullet, transform.position, Quaternion.identity) as Bullet_Script;
-            ForSpawn1.SetAngle(Mathf.Sin(Time.deltaTime * 60) * 120 * i);
+            ForSpawn1.SetAngle(i*60);
         }
 
         Instantiate(m_FlightObject, transform.position, Quaternion.identity);

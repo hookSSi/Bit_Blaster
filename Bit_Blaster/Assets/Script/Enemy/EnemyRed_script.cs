@@ -15,7 +15,7 @@ public class EnemyRed_script : Enemy_script {
         m_Rigid = GetComponent<Rigidbody2D>();
         m_Velocity = 2f;
         m_HealthPoint = 1;
-        m_Score = 100;
+        m_Score = 100;    
     }
 
     protected override void Move()
@@ -23,7 +23,7 @@ public class EnemyRed_script : Enemy_script {
         if(GameObject.FindWithTag("Player") != null)
         {
             m_target = GameObject.FindGameObjectWithTag("Player").transform;
-            Vector2 vec = m_target.position - transform.position;
+            Vector2 vec = m_target.position- transform.position;
             SetDirection(vec.normalized);
             m_Rigid.velocity = m_Direction * m_Velocity;
         }

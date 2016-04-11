@@ -15,6 +15,7 @@ public class Spawn_Script : MonoBehaviour {
     private FlightObject_Script Object; // 생성용 객체
     private float m_Time; // 게임 시간 경과
 
+
     public FlightObject_Script[] m_Prefab; // 적 종류 배열
     public GameManager m_Map; // 기준 맵
 
@@ -44,6 +45,7 @@ public class Spawn_Script : MonoBehaviour {
     void FixedUpdate()
     {
         m_Time += Time.deltaTime;
+        
     }
 
     /* 스폰 관련 함수들 */
@@ -57,7 +59,7 @@ public class Spawn_Script : MonoBehaviour {
         if (m_Direction > 0 && m_Direction < 5)
         {
             /* 난이도 조절 */
-
+            
             if (m_Time > 5)
             {
                 Random.Range(0, 2);
@@ -73,19 +75,26 @@ public class Spawn_Script : MonoBehaviour {
             if(m_Time > 35)
             {
                 m_SpawnRate1 = 0.3f;
-                index = Random.Range(0, 3);
+                index = Random.Range(0, 2);
             }
             if(m_Time > 50)
             {
                 m_SpawnRate1 = 0.3f;
                 m_MaxCount = 100;
-                index = Random.Range(0, m_Prefab.Length);
+                index = Random.Range(1, 3);
             }
             if (m_Time > 80)
             {
                 m_SpawnRate1 = 0.1f;
                 m_SpawnRate2 = 5;
                 m_MaxCount = 150;
+                index = Random.Range(0, 3);
+            }
+            if (m_Time > 130)
+            {
+                m_SpawnRate1 = 0.1f;
+                m_SpawnRate2 = 5;
+                m_MaxCount = 300;
                 index = Random.Range(0, m_Prefab.Length);
             }
 
@@ -121,7 +130,8 @@ public class Spawn_Script : MonoBehaviour {
         ForSpawn = Instantiate(Object, p_SpawnLocation, Quaternion.identity) as FlightObject_Script;
         ForSpawn.SetDirection(p_Objectdirection);
 
-        ForSpawn.transform.parent = this.transform;
+        ForSpawn.transform.parent = transform;
+
         m_Count++;
     }
     void SpawnToPlayer(Vector2 p_SpawnLocation, int p_index)
@@ -135,8 +145,14 @@ public class Spawn_Script : MonoBehaviour {
         vec = (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position - p_SpawnLocation; // 플레이어를 향한 벡터
         ForSpawn.SetDirection(vec.normalized);
 
-        ForSpawn.transform.parent = this.transform;
+        ForSpawn.transform.parent = transform;
+
         m_Count++;
+    }
+
+    void Balance()
+    {
+      
     }
 
     /* Get,Set */

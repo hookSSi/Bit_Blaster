@@ -7,5 +7,4 @@ public class BlueEnemyBullet : Bullet_Script {
     {
         m_Velocity = 2f; // 속도
     }
-
 }
