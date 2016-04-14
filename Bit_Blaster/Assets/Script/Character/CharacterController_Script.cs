@@ -9,23 +9,25 @@ public class CharacterController_Script : FlightObject_Script {
     public float m_FireRate = 0.2f; // 공격 딜레이
     public Transform m_RightFirePosition; // 오른쪽 발사 위치
     public Transform m_LeftFirePosition; // 왼쪽 발사 위치
+	public Transform m_MidFirePosition; // 중앙 발사 위치
     public GameObject m_FireSound; // 발사 소리
     public GameObject m_MovingSound; // 이동 소리
     public GameObject m_DestroyedSound; // 죽는 소리
 
     private Bullet_Script Bullet; // 총알 스폰용
-    private bool m_IsAlive = true;  // 살아있니?
+    private bool m_IsAlive = true;  // 살아있니? ㄴㄴ
     float dirX = 1;
     float dirY = 1;
-    bool side = true;
+	bool side = true, mid = false, guided = false;
     
     
 
 	void Start () 
     {
-        Bullet = m_Bullet.GetComponent<Bullet_Script>();
-        m_Velocity = 5f;
-        InvokeRepeating("FireBullet", 0.1f, m_FireRate);
+		//Bullet = SetBullet(m_Bullet, 3);/*.GetComponent<Bullet_Script>()*/;
+		SetBullet(m_Bullet, 3);
+		m_Velocity = 5f;
+        //InvokeRepeating("FireBullet", 0.1f, m_FireRate);
         m_Rigid.velocity = m_Direction * m_Velocity;
 	}
 	
@@ -56,12 +58,28 @@ public class CharacterController_Script : FlightObject_Script {
     {
         Bullet_Script ForSpawn;
 
-        if(side)
-            ForSpawn = Instantiate(Bullet, m_RightFirePosition.position, transform.rotation) as Bullet_Script;
-        else
-            ForSpawn = Instantiate(Bullet, m_LeftFirePosition.position, transform.rotation) as Bullet_Script;
-        side = !side;
-        ForSpawn.SetDirection(m_Direction);
+		if (mid)
+		{
+			ForSpawn = Instantiate(Bullet, m_MidFirePosition.position, transform.rotation) as Bullet_Script;
+			ForSpawn.SetDirection(m_Direction);
+		}
+
+		else
+		{
+			if (side)
+			{
+				if (guided) Bullet.GetComponent<GuidedBullet>().SetTarget(dirX, dirY, this.transform);
+				ForSpawn = Instantiate(Bullet, m_RightFirePosition.position, transform.rotation) as Bullet_Script;
+			}
+			else
+			{
+				if (guided) Bullet.GetComponent<GuidedBullet>().SetTarget(dirX, dirY, this.transform);
+				ForSpawn = Instantiate(Bullet, m_LeftFirePosition.position, transform.rotation) as Bullet_Script;
+			}
+
+			side = !side;
+			ForSpawn.SetDirection(m_Direction);
+		}       
     }
 
     protected override void Move() // 이동 처리
@@ -82,7 +100,7 @@ public class CharacterController_Script : FlightObject_Script {
     {
         if (col.gameObject.tag == "Item") // 아이템 적용 처리
         {
-            SetBullet(col.GetComponent<Item_Script>().m_ItemArray[col.GetComponent<Item_Script>().GetItemIndex()]);           
+            SetBullet(col.GetComponent<Item_Script>().m_ItemArray[col.GetComponent<Item_Script>().GetItemIndex()], col.GetComponent<Item_Script>().GetItemIndex() + 1);           
             Destroy(col.gameObject);
         }
 
@@ -100,12 +118,18 @@ public class CharacterController_Script : FlightObject_Script {
         m_Velocity = p_Velocity;
     }
 
-    public void SetBullet(GameObject p_Bullet)
+    public void SetBullet(GameObject p_Bullet, int itemIndex)
     {
         m_Bullet = p_Bullet;
         Bullet = m_Bullet.GetComponent<Bullet_Script>();
         m_FireRate = Bullet.GetFireRate();
         CancelInvoke();
         InvokeRepeating("FireBullet", 0.1f, m_FireRate);
-    }
+
+		if (itemIndex == 1) mid = true;
+		else mid = false;
+
+		if (itemIndex == 3) guided = true;
+		else guided = false;
+	}
 }
