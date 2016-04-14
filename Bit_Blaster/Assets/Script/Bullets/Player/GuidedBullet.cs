@@ -19,11 +19,11 @@ public class GuidedBullet : Bullet_Script
 		DestroyOutOfMap();
 	}
 
-	public override void SetDirection(Vector2 p_Direction)
+	/*public override void SetDirection(Vector2 p_Direction)
 	{
 		m_Direction = p_Direction;
 		//transform.eulerAngles = new Vector3(0, 0, 180 - 1 * Mathf.Atan2(p_Direction.y, p_Direction.x) * Mathf.Rad2Deg);
-	}
+	}*/
 
 	protected override void Move()
 	{
