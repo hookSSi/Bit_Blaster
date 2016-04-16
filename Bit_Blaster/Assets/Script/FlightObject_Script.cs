@@ -54,7 +54,7 @@ public class FlightObject_Script : MonoBehaviour {
         return m_Direction;
     }
 
-    public void SetDirection(Vector2 p_Direction)
+    public virtual void SetDirection(Vector2 p_Direction)
     {
         m_Direction = p_Direction;
         transform.eulerAngles = new Vector3(0,0,-1 * Mathf.Atan2(p_Direction.x, p_Direction.y) * Mathf.Rad2Deg);

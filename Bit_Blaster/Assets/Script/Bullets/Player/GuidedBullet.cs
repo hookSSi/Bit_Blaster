@@ -19,14 +19,16 @@ public class GuidedBullet : Bullet_Script
 		DestroyOutOfMap();
 	}
 
-	/*public override void SetDirection(Vector2 p_Direction)
+	public override void SetDirection(Vector2 p_Direction)
 	{
 		m_Direction = p_Direction;
-		//transform.eulerAngles = new Vector3(0, 0, 180 - 1 * Mathf.Atan2(p_Direction.y, p_Direction.x) * Mathf.Rad2Deg);
-	}*/
+		//transform.eulerAngles = new Vector3(0, 0, GameObject.FindWithTag("Player").transform.eulerAngles.z);
+	}
 
 	protected override void Move()
 	{
+		transform.eulerAngles = new Vector3(0, 0, GameObject.FindWithTag("Player").transform.eulerAngles.z);
+
 		if (m_Target != null)
 		{
 			Vector2 vec = m_Target.position - transform.position;
@@ -34,7 +36,6 @@ public class GuidedBullet : Bullet_Script
 		}
 
 		m_Rigid.velocity = m_Direction * m_Velocity;
-
 	}
 
 	protected override void OnTriggerEnter2D(Collider2D col)
@@ -52,6 +53,7 @@ public class GuidedBullet : Bullet_Script
 			{
 				if (0 <= x && 0 <= y) enemyArray.Add(tmp.transform);
 			}
+
 			else if ((tmp.transform.position.x - firePosition.position.x) >= 0 && (tmp.transform.position.y - firePosition.position.y) <= 0)
 			{
 				if (0 <= x && y <= 0) enemyArray.Add(tmp.transform);
