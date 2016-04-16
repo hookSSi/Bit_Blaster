@@ -49,18 +49,26 @@ public class GuidedBullet : Bullet_Script
 		foreach (GameObject tmp in GameObject.FindGameObjectsWithTag("Enemy"))
 		{
 			if ((tmp.transform.position.x - firePosition.position.x) >= 0 && (tmp.transform.position.y - firePosition.position.y) >= 0)
+			{
 				if (0 <= x && 0 <= y) enemyArray.Add(tmp.transform);
-
-			if ((tmp.transform.position.x - firePosition.position.x) >= 0 && (tmp.transform.position.y - firePosition.position.y) <= 0)
+			}
+			else if ((tmp.transform.position.x - firePosition.position.x) >= 0 && (tmp.transform.position.y - firePosition.position.y) <= 0)
+			{
 				if (0 <= x && y <= 0) enemyArray.Add(tmp.transform);
+			}
 
-			if ((tmp.transform.position.x - firePosition.position.x) <= 0 && (tmp.transform.position.y - firePosition.position.y) >= 0)
+			else if ((tmp.transform.position.x - firePosition.position.x) <= 0 && (tmp.transform.position.y - firePosition.position.y) >= 0)
+			{
 				if (x <= 0 && 0 <= y) enemyArray.Add(tmp.transform);
+			}
 
-			if ((tmp.transform.position.x - firePosition.position.x) <= 0 && (tmp.transform.position.y - firePosition.position.y) <= 0)
+			else if ((tmp.transform.position.x - firePosition.position.x) <= 0 && (tmp.transform.position.y - firePosition.position.y) <= 0)
+			{
 				if (x <= 0 && y <= 0) enemyArray.Add(tmp.transform);
+			}
 		}
 
 		if (enemyArray.Count != 0) m_Target = enemyArray[Random.Range(0, enemyArray.Count)];
+		else m_Target = null;
 	}
 }
