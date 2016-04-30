@@ -9,12 +9,4 @@ public class GrayEnemyBullet : Bullet_Script
 	{
         m_Velocity = 5f;
 	}
-
-	// Update is called once per frame
-	void FixedUpdate()
-	{
-		Move();
-		DestroyOutOfMap();
-	}
-
 }

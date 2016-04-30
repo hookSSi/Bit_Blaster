@@ -60,9 +60,9 @@ public class FlightObject_Script : MonoBehaviour {
         transform.eulerAngles = new Vector3(0,0,-1 * Mathf.Atan2(p_Direction.x, p_Direction.y) * Mathf.Rad2Deg);
     }
 
-    public void SetMaxVelocity(float p_MaxVelocity)
+    public void SetVelocity(float p_Velocity)
     {
-        this.m_Velocity = p_MaxVelocity;
+        this.m_Velocity = p_Velocity;
     }
 
     public void SetAngle(float p_Angle)

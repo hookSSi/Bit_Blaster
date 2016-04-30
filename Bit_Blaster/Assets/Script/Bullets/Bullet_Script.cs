@@ -4,6 +4,7 @@ using System.Collections;
 public class Bullet_Script : FlightObject_Script {
 
     public float m_FireRate; // 총알 딜레이
+    public GameObject m_HitSound; // 피격 사운드
 
     void Awake()
     {
