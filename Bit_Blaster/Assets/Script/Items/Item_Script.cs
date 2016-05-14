@@ -16,12 +16,15 @@ public class Item_Script : FlightObject_Script
 	{
         m_RangeMax = m_ItemArray.Length;
         m_ItemIndex = Random.Range(m_RangeMin, m_RangeMax);
+        m_Velocity = 1.5f;
 	}
 	
-	// Update is called once per frame
-	void Update ()
+	void FixedUpdate()
 	{
 		Move();
+
+        if(m_Velocity <= 4)
+            m_Velocity += Time.deltaTime * 0.3f;
 	}
 
 	protected override void Move()

@@ -62,7 +62,7 @@ public class Spawn_Script : MonoBehaviour {
             
             if (m_Time > 5)
             {
-                Random.Range(0, 2);
+                index = Random.Range(0, 2);
                 m_SpawnRate2 = 10;
             }
                 
@@ -88,7 +88,7 @@ public class Spawn_Script : MonoBehaviour {
                 m_SpawnRate1 = 0.1f;
                 m_SpawnRate2 = 5;
                 m_MaxCount = 150;
-                index = Random.Range(0, 3);
+                index = Random.Range(0, m_Prefab.Length);
             }
             if (m_Time > 130)
             {
@@ -117,8 +117,8 @@ public class Spawn_Script : MonoBehaviour {
                     break;
             }
 
-            if (GameObject.FindWithTag("Player") != null && m_Time > 80)
-                SpawnToPlayer(new Vector2(Random.Range(-m_Map.X + m_MinLocation, m_Map.X - m_MinLocation), Random.Range(-m_Map.Y + m_MinLocation, m_Map.Y - m_MinLocation)), index);
+            /*if (GameObject.FindWithTag("Player") != null && m_Time > 80)
+                SpawnToPlayer(new Vector2(Random.Range(-m_Map.X + m_MinLocation, m_Map.X - m_MinLocation), Random.Range(-m_Map.Y + m_MinLocation, m_Map.Y - m_MinLocation)), index);*/
         }
     }
 

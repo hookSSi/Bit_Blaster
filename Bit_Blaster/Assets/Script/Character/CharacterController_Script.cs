@@ -29,7 +29,9 @@ public class CharacterController_Script : FlightObject_Script {
 		m_Velocity = 5f;
         //InvokeRepeating("FireBullet", 0.1f, m_FireRate);
         m_Rigid.velocity = m_Direction * m_Velocity;
-	}
+        guided = false;
+
+    }
 	
     void Update()
     {
